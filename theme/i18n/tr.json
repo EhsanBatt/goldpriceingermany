@@ -1,0 +1,59 @@
+{
+  "site": {
+    "title": "Almanya'da Canlı Altın Fiyatları | Euro ve Dolar Anlık Takip",
+    "description": "Almanya'da güncel altın fiyatlarını Euro, Dolar ve TL olarak takip edin. 24 ayar, 22 ayar, 21 ayar ve çeyrek altın fiyatları canlı grafik ve hesaplama aracıyla.",
+    "footerDesc": "Almanya'daki Türk ve Arap yatırımcılar için Euro ve TL cinsinden anlık altın fiyatları sunan uzman takip platformu."
+  },
+  "nav": {
+    "home": "Ana Sayfa",
+    "livePrices": "Canlı Fiyatlar",
+    "chart": "Canlı Grafik",
+    "calculator": "Altın Hesaplama",
+    "alloys": "Ayar ve Hurda",
+    "blog": "Makaleler",
+    "about": "Hakkımızda",
+    "contact": "İletişim",
+    "terms": "Şartlar ve Koşullar",
+    "privacy": "Gizlilik Politikası"
+  },
+  "common": {
+    "live": "CANLI / Piyasa Açık",
+    "readMore": "Devamını Oku",
+    "calculate": "Altın Değerini Hesapla",
+    "viewChart": "Fiyat Grafiğini İncele",
+    "copyright": "Tüm hakları saklıdır © {year} | Almanya Altın Fiyatları - Kullanıcı mükemmelliği için tasarlandı",
+    "language": "Dil"
+  },
+  "faq": [
+    {
+      "question": "Almanya'da bugün 22 ayar gram altın fiyatı ne kadar?",
+      "answer": "Almanya'da 22 ayar gram altın fiyatı şu anda yaklaşık 67,33 Euro civarındadır. Bilezik ve ziynet eşyası için en çok tercih edilen ayardır.",
+      "display": true
+    },
+    {
+      "question": "Almanya'da külçe altın alırken KDV (MwSt) ödenir mi?",
+      "answer": "Hayır, Alman vergi kanunlarına göre yatırım amaçlı külçe altın (24 ayar) alımları %19 KDV'den tamamen muaftır.",
+      "display": true
+    },
+    {
+      "question": "Alım ve satım fiyatı arasındaki fark (Makas) nedir?",
+      "answer": "Kuyumcuların altını sattığı fiyat ile geri aldığı hurda/eritme fiyatı arasındaki farktır. En düşük makas yatırımlık külçelerdedir.",
+      "display": true
+    },
+    {
+      "question": "Havalimanından Almanya'ya veya Türkiye'ye altın götürülebilir mi?",
+      "answer": "Evet, ancak AB gümrük kuralları gereği kişi başı toplam değeri 10.000 Euro'yu aşan nakit veya altınlar gümrüğe beyan edilmelidir.",
+      "display": true
+    }
+  ],
+  "howItWorks": {
+    "title": "Almanya Altın Fiyatları Nasıl Çalışır?",
+    "subtitle": "Frankfurt borsası verilerini ve kuyumcu alım-satım fiyatlarını anlık olarak size ulaştırıyoruz",
+    "step1Title": "Anlık Borsa Akışı",
+    "step1Desc": "Küresel ons altın fiyatlarını anlık döviz kurlarıyla doğrudan Euro ve TL'ye çeviriyoruz.",
+    "step2Title": "Hassas Ayar Hesaplaması",
+    "step2Desc": "24, 22, 21, 18 ve 14 ayar altınlar için saflık oranlarını tam olarak uyguluyoruz.",
+    "step3Title": "Gelişmiş Yatırım Araçları",
+    "step3Desc": "Bilinçli alım satım kararları için hesaplama makineleri ve hurda eritme tabloları sunuyoruz."
+  }
+}

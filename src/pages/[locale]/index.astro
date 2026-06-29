@@ -1,0 +1,12 @@
+---
+import HomeView from '~theme/views/HomeView.astro';
+import { getStaticLocalePaths } from '~theme/i18n/utils';
+
+export function getStaticPaths() {
+  return getStaticLocalePaths();
+}
+
+const { locale } = Astro.params;
+---
+
+<HomeView locale={locale} />

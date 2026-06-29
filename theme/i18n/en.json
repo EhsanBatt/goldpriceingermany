@@ -1,0 +1,59 @@
+{
+  "site": {
+    "title": "Live Gold Price in Germany | EUR & USD Real-time Updates",
+    "description": "Track live gold prices in Germany in EUR, USD, and TRY. Real-time updates per gram for 24k, 22k, 21k, 18k and gold ounce with interactive charts and calculator.",
+    "footerDesc": "Dedicated portal providing real-time live gold price coverage in EUR, USD and other currencies across Germany to assist consumers and investors."
+  },
+  "nav": {
+    "home": "Home",
+    "livePrices": "Live Prices",
+    "chart": "Live Chart",
+    "calculator": "Calculator",
+    "alloys": "Alloys & Scrap",
+    "blog": "Blog",
+    "about": "About Us",
+    "contact": "Contact Us",
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy"
+  },
+  "common": {
+    "live": "LIVE / Market Open",
+    "readMore": "Read More",
+    "calculate": "Calculate Gold Value",
+    "viewChart": "View Price Chart",
+    "copyright": "All rights reserved © {year} | Gold Price in Germany - Designed for user excellence & market analytics",
+    "language": "Language"
+  },
+  "faq": [
+    {
+      "question": "What is the price of 21k gold per gram in Germany today?",
+      "answer": "The price of 21k gold per gram in Germany today hovers around 64.27 EUR. 21k is widely preferred among Middle Eastern communities in Germany for traditional jewelry.",
+      "display": true
+    },
+    {
+      "question": "Is buying gold bars VAT-free in Germany?",
+      "answer": "Yes, under German tax law, investment gold (24k bullion bars and certified gold coins) is completely exempt from 19% VAT (MwSt).",
+      "display": true
+    },
+    {
+      "question": "What is the difference between gold buy and sell price (Spread) in Germany?",
+      "answer": "The buying price is what you pay to dealers or banks, while the selling (melt/scrap) price is what dealers pay when buying from you. Bullion bars have the lowest spread.",
+      "display": true
+    },
+    {
+      "question": "Can I travel with gold through German airports?",
+      "answer": "Yes, but under EU customs rules, cash or precious metals exceeding 10,000 EUR per person must be officially declared upon entering or leaving the EU.",
+      "display": true
+    }
+  ],
+  "howItWorks": {
+    "title": "How Gold Price Germany Works",
+    "subtitle": "Connecting you directly to Frankfurt exchange market data and certified bullion prices real-time",
+    "step1Title": "Instant Exchange Feed",
+    "step1Desc": "We fetch live global spot gold ounce prices and convert them directly to EUR using real-time forex rates.",
+    "step2Title": "Accurate Alloy Calculation",
+    "step2Desc": "We apply exact purity ratios to calculate exact per-gram prices for 24k, 22k, 21k, 18k, 14k, and 8k.",
+    "step3Title": "Advanced Investor Tools",
+    "step3Desc": "We provide interactive calculators, dynamic charts, and scrap melt valuation tables for informed trading."
+  }
+}

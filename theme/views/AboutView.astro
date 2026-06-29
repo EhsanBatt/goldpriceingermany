@@ -1,0 +1,54 @@
+---
+import BaseLayout from '~theme/components/BaseLayout.astro';
+import { getTranslations } from '~theme/i18n';
+import { defaultLocale } from '~theme/i18n/utils';
+import siteConfig from '@/config/site.json';
+
+const { locale = defaultLocale } = Astro.props;
+const t = getTranslations(locale);
+const isAr = locale === 'ar';
+
+const aboutSchema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": `${t.nav.about} - Gold Price Germany`,
+  "url": Astro.url.href,
+  "description": isAr ? "معلومات عن بوابة سعر الذهب في ألمانيا وأهدافنا في تقديم الشفافية في سوق المعادن الثمينة." : "About Gold Price Germany portal and our mission in bringing transparency to the precious metals market."
+};
+---
+
+<BaseLayout locale={locale} title={`${t.nav.about} | ${t.site.title.split('|')[0]}`} schema={aboutSchema}>
+  <div class="container py-16 max-w-4xl">
+    <div class="bg-[#161e31]/80 border border-[rgba(212,175,55,0.22)] p-8 md:p-12 rounded-3xl shadow-2xl">
+      <h1 class="text-4xl font-black text-white mb-6 flex items-center gap-3">
+        <span>👑</span> {t.nav.about}
+      </h1>
+      
+      <div class="space-y-6 text-slate-300 leading-relaxed text-lg">
+        <p>
+          {isAr
+            ? "مرحباً بكم في موقع «سعر الذهب في ألمانيا»، المنصة المتخصصة الأولى والأكثر موثوقية لمتابعة أسعار الذهب والفضة والمعادن الثمينة لحظة بلحظة داخل جمهورية ألمانيا الاتحادية."
+            : "Welcome to Gold Price Germany, the premier specialized platform for tracking live gold, silver, and precious metal prices in real-time across the Federal Republic of Germany."}
+        </p>
+
+        <h2 class="text-2xl font-bold text-[#d4af37] pt-4">
+          {isAr ? "رسالتنا ورؤيتنا" : "Our Mission & Vision"}
+        </h2>
+        <p>
+          {isAr
+            ? "نهدف إلى تمكين المستهلك والمستثمر في ألمانيا، ولا سيما الجاليات العربية والتركية، من الحصول على بيانات دقيقة ومباشرة لبورصة فرانكفورت العالمية، ومقارنتها بأسعار الصاغة وتجار السبائك المعتمدين لتجنب الهوامش المرتفعة."
+            : "We aim to empower consumers and investors in Germany—especially expatriate communities—with precise, direct feeds from the Frankfurt exchange, enabling transparent comparisons with local bullion dealers to avoid excessive markups."}
+        </p>
+
+        <h2 class="text-2xl font-bold text-[#d4af37] pt-4">
+          {isAr ? "الشفافية والالتزام بالقوانين" : "Transparency & Legal Compliance"}
+        </h2>
+        <p>
+          {isAr
+            ? "نحرص دائماً على توضيح الجوانب القانونية والضريبية الهامة، مثل إعفاء الذهب الاستثماري (عيار 24) من ضريبة القيمة المضافة (MwSt)، وإعفاء الأرباح الرأسمالية من ضريبة الدخل في حالة الاحتفاظ بالسبائك لمدة تزيد عن 12 شهراً."
+            : "We provide vital clarification on legal and tax aspects, including the 100% VAT exemption (MwSt) on investment bullion (24k) and personal income tax exemption on capital gains when holding bullion for over 12 months."}
+        </p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

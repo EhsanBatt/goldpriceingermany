@@ -1,0 +1,12 @@
+---
+import TermsView from '~theme/views/TermsView.astro';
+import { getStaticLocalePaths } from '~theme/i18n/utils';
+
+export function getStaticPaths() {
+  return getStaticLocalePaths();
+}
+
+const { locale } = Astro.params;
+---
+
+<TermsView locale={locale} />

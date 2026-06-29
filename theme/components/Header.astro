@@ -1,0 +1,115 @@
+---
+import { getTranslations } from '~theme/i18n';
+import { getLocalizedUrl, supportedLocales, defaultLocale } from '~theme/i18n/utils';
+import siteConfig from '@/config/site.json';
+
+const { locale = defaultLocale } = Astro.props;
+const t = getTranslations(locale);
+const currentPath = Astro.url.pathname;
+---
+
+<header class="navbar sticky top-0 z-50 bg-[#070a12]/85 backdrop-blur-md border-b border-[rgba(212,175,55,0.22)] py-4 transition-all">
+  <div class="container flex justify-between items-center">
+    <a href={getLocalizedUrl('/', locale)} class="flex items-center gap-3 no-underline">
+      <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl shadow-[0_0_20px_rgba(212,175,55,0.4)] animate-[pulseGlow_3s_infinite_alternate]" style="background: var(--gold-gradient);">👑</div>
+      <div class="flex flex-col">
+        <span class="text-2xl font-black tracking-tight text-white group-hover:text-[#fbe8a6] transition-colors">{t.site.title.split('|')[0]}</span>
+        <small class="text-xs text-[#d4af37] font-bold">{locale === 'ar' ? 'البوابة الرسمية لأسعار الذهب باليورو' : 'Official Portal for Gold in EUR'}</small>
+      </div>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden lg:flex items-center gap-6">
+      <ul class="flex items-center gap-6 list-none m-0 p-0">
+        <li><a href={getLocalizedUrl('/', locale)} class="text-slate-100 font-semibold hover:text-[#d4af37] transition-colors">{t.nav.home}</a></li>
+        <li><a href={getLocalizedUrl('/#chart', locale)} class="text-slate-100 font-semibold hover:text-[#d4af37] transition-colors">{t.nav.chart}</a></li>
+        <li><a href={getLocalizedUrl('/#calculator', locale)} class="text-slate-100 font-semibold hover:text-[#d4af37] transition-colors">{t.nav.calculator}</a></li>
+        <li><a href={getLocalizedUrl('/#alloys', locale)} class="text-slate-100 font-semibold hover:text-[#d4af37] transition-colors">{t.nav.alloys}</a></li>
+        <li><a href={getLocalizedUrl('/blog', locale)} class="text-slate-100 font-semibold hover:text-[#d4af37] transition-colors">{t.nav.blog}</a></li>
+        <li><a href={getLocalizedUrl('/about-us', locale)} class="text-slate-100 font-semibold hover:text-[#d4af37] transition-colors">{t.nav.about}</a></li>
+        <li><a href={getLocalizedUrl('/contact-us', locale)} class="text-slate-100 font-semibold hover:text-[#d4af37] transition-colors">{t.nav.contact}</a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-4">
+      <!-- Language Switcher -->
+      <div class="relative group">
+        <button class="flex items-center gap-1 bg-[#161e31] border border-[rgba(212,175,55,0.3)] px-3 py-1.5 rounded-lg text-sm font-bold text-white hover:border-[#d4af37] transition-all">
+          🌐 {locale.toUpperCase()}
+        </button>
+        <div class="absolute top-full mt-2 right-0 bg-[#0d1322] border border-[rgba(212,175,55,0.3)] rounded-xl py-2 w-28 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col z-50">
+          {supportedLocales.map((loc) => (
+            <a
+              href={getLocalizedUrl(currentPath, loc)}
+              class={`px-4 py-1.5 text-sm font-semibold hover:bg-[rgba(212,175,55,0.15)] ${loc === locale ? 'text-[#d4af37]' : 'text-slate-300'}`}
+            >
+              {loc === 'ar' ? '🇪🇬 العربية' : loc === 'en' ? '🇬🇧 English' : loc === 'de' ? '🇩🇪 Deutsch' : '🇹🇷 Türkçe'}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <button id="theme-toggle" class="bg-[#161e31] border border-[rgba(212,175,55,0.3)] text-white w-10 h-10 rounded-xl flex items-center justify-center text-lg hover:border-[#d4af37] transition-all" title="Theme">☀️</button>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-btn"
+        class="lg:hidden bg-[#161e31] border border-[rgba(212,175,55,0.3)] text-white p-2 rounded-xl flex items-center justify-center text-xl"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        aria-label="Toggle Menu"
+      >
+        ☰
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Panel -->
+  <div id="mobile-nav" class="fixed inset-0 bg-[#070a12]/95 backdrop-blur-xl z-50 flex flex-col justify-center items-center gap-6 opacity-0 pointer-events-none transition-all duration-300" aria-hidden="true">
+    <button id="mobile-close-btn" class="absolute top-6 right-6 text-3xl text-[#d4af37] font-bold p-2">✕</button>
+    <ul class="flex flex-col items-center gap-6 list-none text-xl font-bold">
+      <li><a href={getLocalizedUrl('/', locale)} class="mobile-link text-white hover:text-[#d4af37]">{t.nav.home}</a></li>
+      <li><a href={getLocalizedUrl('/#chart', locale)} class="mobile-link text-white hover:text-[#d4af37]">{t.nav.chart}</a></li>
+      <li><a href={getLocalizedUrl('/#calculator', locale)} class="mobile-link text-white hover:text-[#d4af37]">{t.nav.calculator}</a></li>
+      <li><a href={getLocalizedUrl('/#alloys', locale)} class="mobile-link text-white hover:text-[#d4af37]">{t.nav.alloys}</a></li>
+      <li><a href={getLocalizedUrl('/blog', locale)} class="mobile-link text-white hover:text-[#d4af37]">{t.nav.blog}</a></li>
+      <li><a href={getLocalizedUrl('/about-us', locale)} class="mobile-link text-white hover:text-[#d4af37]">{t.nav.about}</a></li>
+      <li><a href={getLocalizedUrl('/contact-us', locale)} class="mobile-link text-white hover:text-[#d4af37]">{t.nav.contact}</a></li>
+    </ul>
+  </div>
+</header>
+
+<script>
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const closeBtn = document.getElementById('mobile-close-btn');
+  const mobileNav = document.getElementById('mobile-nav');
+  const mobileLinks = document.querySelectorAll('.mobile-link');
+
+  function openMenu() {
+    if (mobileNav && menuBtn) {
+      mobileNav.classList.remove('opacity-0', 'pointer-events-none');
+      mobileNav.setAttribute('aria-hidden', 'false');
+      menuBtn.setAttribute('aria-expanded', 'true');
+      menuBtn.innerHTML = '✕';
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeMenu() {
+    if (mobileNav && menuBtn) {
+      mobileNav.classList.add('opacity-0', 'pointer-events-none');
+      mobileNav.setAttribute('aria-hidden', 'true');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.innerHTML = '☰';
+      document.body.style.overflow = '';
+    }
+  }
+
+  menuBtn?.addEventListener('click', () => {
+    const isOpen = menuBtn.getAttribute('aria-expanded') === 'true';
+    if (isOpen) closeMenu(); else openMenu();
+  });
+
+  closeBtn?.addEventListener('click', closeMenu);
+  mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+</script>

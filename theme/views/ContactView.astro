@@ -1,0 +1,33 @@
+---
+import BaseLayout from '~theme/components/BaseLayout.astro';
+import ContactForm from '~theme/components/ContactForm.astro';
+import { getTranslations } from '~theme/i18n';
+import { defaultLocale } from '~theme/i18n/utils';
+
+const { locale = defaultLocale } = Astro.props;
+const t = getTranslations(locale);
+const isAr = locale === 'ar';
+
+const contactSchema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": `${t.nav.contact} - Gold Price Germany`,
+  "url": Astro.url.href,
+  "description": isAr ? "تواصل مع فريق تحرير ومستشاري الذهب في ألمانيا لأي استفسارات تجارية أو إعلامية." : "Contact our gold investment editorial team in Germany for business or press inquiries."
+};
+---
+
+<BaseLayout locale={locale} title={`${t.nav.contact} | ${t.site.title.split('|')[0]}`} schema={contactSchema}>
+  <div class="container py-16">
+    <div class="text-center max-w-2xl mx-auto mb-10">
+      <h1 class="text-4xl font-black text-white mb-3">📞 {t.nav.contact}</h1>
+      <p class="text-slate-400 text-lg">
+        {isAr
+          ? "هل لديك سؤال حول استثمارات الذهب أو ترغب في الاستفسار عن وكلاء ومحلات الصاغة المعتمدة في ألمانيا؟ راسلنا الآن."
+          : "Do you have a question regarding gold investment or authorized bullion dealers across Germany? Get in touch with our team."}
+      </p>
+    </div>
+
+    <ContactForm locale={locale} />
+  </div>
+</BaseLayout>

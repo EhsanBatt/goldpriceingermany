@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import BlogPostView from '~theme/views/BlogPostView.astro';
+import { supportedLocales, defaultLocale } from '~theme/i18n/utils';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  const locales = supportedLocales.filter(l => l !== defaultLocale);
+  
+  return locales.flatMap(locale => 
+    posts.map(post => ({
+      params: { locale, slug: post.slug },
+      props: { post },
+    }))
+  );
+}
+
+const { post } = Astro.props;
+const { locale } = Astro.params;
+---
+
+<BlogPostView post={post} locale={locale} />

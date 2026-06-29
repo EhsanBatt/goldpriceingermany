@@ -1,0 +1,71 @@
+---
+import { getTranslations } from '~theme/i18n';
+import { defaultLocale } from '~theme/i18n/utils';
+
+const { locale = defaultLocale } = Astro.props;
+const t = getTranslations(locale);
+const faqs = (t.faq || []).filter((item: any) => item.display !== false);
+const isAr = locale === 'ar';
+---
+
+<section class="py-20 bg-[#0c1220] border-t border-white/10" id="faq">
+  <div class="container max-w-4xl">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">❓ {isAr ? 'أسئلة شائعة وإجابات واضحة' : 'Frequently Asked Questions'}</h2>
+      <p class="text-slate-300 text-lg">{isAr ? 'كل ما يهمك معرفته حول قوانين شراء وبيع الذهب، الضرائب، والفرق بين الأعيرة في ألمانيا' : 'Everything you need to know about German bullion laws, taxation, and karat valuation.'}</p>
+    </div>
+
+    <div class="flex flex-col gap-5 faq-list">
+      {faqs.map((faq: any, idx: number) => (
+        <div class={`bg-[#131b2e] border-2 border-white/10 rounded-2xl overflow-hidden transition-all duration-300 faq-item shadow-lg ${idx === 0 ? 'active border-[#d4af37]' : ''}`}>
+          <button class="w-full text-right p-6 flex justify-between items-center font-bold text-xl text-white cursor-pointer faq-question hover:text-[#fbe8a6] transition-colors">
+            <span class="leading-snug">{faq.question}</span>
+            <span class="text-[#d4af37] text-3xl font-light transition-transform duration-300 faq-toggle mr-4 ml-4 shrink-0">{idx === 0 ? '−' : '+'}</span>
+          </button>
+          <div class={`px-6 text-slate-200 text-base leading-relaxed overflow-hidden transition-all duration-300 faq-answer border-t border-white/5 ${idx === 0 ? 'max-h-96 py-6 bg-[#0f172a]/60' : 'max-h-0 py-0 opacity-0'}`}>
+            {faq.answer}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  function setupFaq() {
+    const items = document.querySelectorAll('.faq-item');
+    items.forEach(item => {
+      const q = item.querySelector('.faq-question');
+      const ans = item.querySelector('.faq-answer');
+      const tog = item.querySelector('.faq-toggle');
+
+      q?.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+        items.forEach(el => {
+          el.classList.remove('active', 'border-[#d4af37]');
+          const a = el.querySelector('.faq-answer');
+          const tg = el.querySelector('.faq-toggle');
+          if (a) {
+            (a as HTMLElement).style.maxHeight = '0px';
+            (a as HTMLElement).classList.remove('py-6', 'bg-[#0f172a]/60', 'opacity-100');
+            (a as HTMLElement).classList.add('py-0', 'opacity-0');
+          }
+          if (tg) tg.textContent = '+';
+        });
+
+        if (!isActive) {
+          item.classList.add('active', 'border-[#d4af37]');
+          if (ans) {
+            (ans as HTMLElement).style.maxHeight = '500px';
+            (ans as HTMLElement).classList.add('py-6', 'bg-[#0f172a]/60', 'opacity-100');
+            (ans as HTMLElement).classList.remove('py-0', 'opacity-0');
+          }
+          if (tog) tog.textContent = '−';
+        }
+      });
+    });
+  }
+
+  setupFaq();
+  document.addEventListener('astro:page-load', setupFaq);
+</script>

@@ -1,0 +1,17 @@
+---
+import { getCollection } from 'astro:content';
+import BlogIndexView from '~theme/views/BlogIndexView.astro';
+import { supportedLocales, defaultLocale } from '~theme/i18n/utils';
+
+export async function getStaticPaths({ paginate }: any) {
+  const posts = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  const locales = supportedLocales.filter(l => l !== defaultLocale);
+  
+  return locales.flatMap(locale => paginate(posts, { pageSize: 12, params: { locale } }));
+}
+
+const { page } = Astro.props;
+const { locale } = Astro.params;
+---
+
+<BlogIndexView page={page} locale={locale} />

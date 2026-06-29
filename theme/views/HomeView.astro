@@ -1,0 +1,43 @@
+---
+import BaseLayout from '~theme/components/BaseLayout.astro';
+import GoldSection from '~theme/components/GoldSection.astro';
+import HowItWorks from '~theme/components/HowItWorks.astro';
+import FaqSection from '~theme/components/FaqSection.astro';
+import { getTranslations } from '~theme/i18n';
+import { defaultLocale } from '~theme/i18n/utils';
+
+const { locale = defaultLocale } = Astro.props;
+const t = getTranslations(locale);
+
+const webSiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": t.site.title,
+  "url": Astro.url.href,
+  "description": t.site.description
+};
+
+const activeFaqs = (t.faq || []).filter((item: any) => item.display !== false);
+const faqSchema = activeFaqs.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": activeFaqs.map((f: any) => ({
+    "@type": "Question",
+    "name": f.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": f.answer
+    }
+  }))
+} : null;
+---
+
+<BaseLayout locale={locale} schema={faqSchema || webSiteSchema}>
+  <script type="application/ld+json" set:html={JSON.stringify(webSiteSchema)} slot="head" />
+  
+  <GoldSection locale={locale} />
+  
+  <HowItWorks locale={locale} />
+  
+  <FaqSection locale={locale} />
+</BaseLayout>

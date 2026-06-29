@@ -1,0 +1,34 @@
+---
+import BaseLayout from '~theme/components/BaseLayout.astro';
+import { getTranslations } from '~theme/i18n';
+import { defaultLocale } from '~theme/i18n/utils';
+
+const { locale = defaultLocale } = Astro.props;
+const t = getTranslations(locale);
+const isAr = locale === 'ar';
+---
+
+<BaseLayout locale={locale} title={`${t.nav.privacy} | ${t.site.title.split('|')[0]}`}>
+  <div class="container py-16 max-w-4xl">
+    <div class="bg-[#161e31]/80 border border-[rgba(212,175,55,0.22)] p-8 md:p-12 rounded-3xl shadow-2xl space-y-6 text-slate-300">
+      <h1 class="text-3xl font-black text-white mb-6">🔒 {t.nav.privacy}</h1>
+      <p>
+        {isAr
+          ? "نحن نولي سرية وبيانات زوارنا الكرام أقصى درجات العناية والاهتمام. تهدف سياسة الخصوصية هذه إلى توضيح كيفية تعاملنا مع البيانات وفقاً للقانون العام لحماية البيانات الأوروبي (DSGVO / GDPR)."
+          : "We place the highest priority on the privacy and confidentiality of our users. This policy explains our data handling practices in strict compliance with European GDPR (DSGVO)."}
+      </p>
+      <h2 class="text-xl font-bold text-[#d4af37]">{isAr ? "1. جمع البيانات وعدم الكشف عنها" : "1. Data Collection & Confidentiality"}</h2>
+      <p>
+        {isAr
+          ? "لا يقوم موقعنا بجمع أي بيانات شخصية حساسة دون إذنك. البيانات المعطاة عبر نموذج الاتصال (الاسم والبريد الإلكتروني) تُستخدم حصراً للرد على استفسارك ولا يتم بيعها أو مشاركتها مع أطراف ثالثة."
+          : "We do not collect sensitive personal data without consent. Contact form inputs (name and email) are used solely to reply to inquiries and are never shared with third parties."}
+      </p>
+      <h2 class="text-xl font-bold text-[#d4af37]">{isAr ? "2. ملفات تعريف الارتباط (Cookies)" : "2. Cookies & Analytics"}</h2>
+      <p>
+        {isAr
+          ? "قد نستخدم ملفات تعريف ارتباط تقنية لتحسين أداء حاسبة الذهب واختيار اللغة والمظهر (الوضع الليلي). يمكنك تعطيل ملفات تعريف الارتباط من إعدادات متصفحك في أي وقت."
+          : "We may use technical cookies to save language selections, calculator states, and theme preferences. You can disable cookies in your browser settings at any time."}
+      </p>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,87 @@
+---
+import BaseLayout from '~theme/components/BaseLayout.astro';
+import { getTranslations } from '~theme/i18n';
+import { defaultLocale, getLocalizedUrl } from '~theme/i18n/utils';
+import siteConfig from '@/config/site.json';
+
+const { page, locale = defaultLocale } = Astro.props;
+const t = getTranslations(locale);
+const isAr = locale === 'ar';
+
+const posts = page.data;
+const startRange = (page.currentPage - 1) * page.size + 1;
+const endRange = Math.min(page.currentPage * page.size, page.total);
+
+const blogSchema = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": `${t.nav.blog} - Gold Price Germany`,
+  "url": Astro.url.href,
+  "description": t.site.description
+};
+
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": posts.map((post: any, idx: number) => ({
+    "@type": "ListItem",
+    "position": idx + 1,
+    "url": `${siteConfig.baseUrl}${getLocalizedUrl(`/blog/${post.slug}`, locale)}`
+  }))
+};
+---
+
+<BaseLayout locale={locale} title={`${t.nav.blog} | ${t.site.title.split('|')[0]}`} schema={itemListSchema}>
+  <script type="application/ld+json" set:html={JSON.stringify(blogSchema)} slot="head" />
+
+  <div class="container py-16">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <h1 class="text-4xl font-black text-white mb-3">📰 {t.nav.blog}</h1>
+      <p class="text-slate-400 text-lg">{isAr ? 'أحدث المقالات وأدلة الاستثمار وتحليلات سوق الذهب في ألمانيا' : 'Latest articles, investment guides, and gold market analytics in Germany'}</p>
+      
+      <div class="mt-4 text-xs font-bold text-[#fbe8a6] bg-[#161e31] inline-block px-4 py-1.5 rounded-full border border-[rgba(212,175,55,0.3)]">
+        {isAr ? `عرض ${startRange}-${endRange} من إجمالي ${page.total} مقال` : `Showing ${startRange}-${endRange} of ${page.total} articles`}
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+      {posts.map((post: any) => (
+        <article class="bg-[#161e31]/75 border border-[rgba(212,175,55,0.22)] rounded-3xl overflow-hidden shadow-xl flex flex-col hover:border-[#d4af37] transition-all group">
+          <div class="h-48 bg-[#0d1322] relative overflow-hidden flex items-center justify-center">
+            <span class="text-6xl group-hover:scale-110 transition-transform duration-300">📈</span>
+            <span class="absolute top-4 right-4 bg-black/60 backdrop-blur-md text-[#d4af37] px-3 py-1 rounded-full text-xs font-bold border border-[#d4af37]/30">{post.data.category}</span>
+          </div>
+          <div class="p-6 flex flex-col flex-grow justify-between gap-4">
+            <div>
+              <div class="text-xs text-slate-400 mb-2">{new Date(post.data.date).toLocaleDateString(locale === 'ar' ? 'ar-DE' : 'en-US')} • {post.data.author}</div>
+              <h2 class="text-xl font-bold text-white mb-2 group-hover:text-[#d4af37] transition-colors leading-snug">{post.data.title}</h2>
+              <p class="text-slate-400 text-sm leading-relaxed line-clamp-3">{post.data.description}</p>
+            </div>
+            <a href={getLocalizedUrl(`/blog/${post.slug}`, locale)} class="text-[#fbe8a6] font-bold text-sm inline-flex items-center gap-1 hover:underline mt-2">
+              {t.common.readMore} {isAr ? '←' : '→'}
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Pagination UI -->
+    {page.lastPage > 1 && (
+      <div class="flex justify-center items-center gap-2">
+        {page.url.prev ? (
+          <a href={getLocalizedUrl(page.url.prev, locale)} class="px-4 py-2 bg-[#161e31] border border-[rgba(212,175,55,0.3)] text-white rounded-xl font-bold hover:border-[#d4af37]">{isAr ? 'السابق' : 'Prev'}</a>
+        ) : (
+          <span class="px-4 py-2 bg-[#0d1322] border border-white/5 text-slate-600 rounded-xl font-bold cursor-not-allowed">{isAr ? 'السابق' : 'Prev'}</span>
+        )}
+
+        <span class="px-4 py-2 bg-[var(--gold-gradient)] text-[#0f172a] font-black rounded-xl">{page.currentPage}</span>
+
+        {page.url.next ? (
+          <a href={getLocalizedUrl(page.url.next, locale)} class="px-4 py-2 bg-[#161e31] border border-[rgba(212,175,55,0.3)] text-white rounded-xl font-bold hover:border-[#d4af37]">{isAr ? 'التالي' : 'Next'}</a>
+        ) : (
+          <span class="px-4 py-2 bg-[#0d1322] border border-white/5 text-slate-600 rounded-xl font-bold cursor-not-allowed">{isAr ? 'التالي' : 'Next'}</span>
+        )}
+      </div>
+    )}
+  </div>
+</BaseLayout>

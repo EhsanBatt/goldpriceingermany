@@ -1,0 +1,78 @@
+---
+import BaseLayout from '~theme/components/BaseLayout.astro';
+import { getTranslations } from '~theme/i18n';
+import { defaultLocale, getLocalizedUrl } from '~theme/i18n/utils';
+import siteConfig from '@/config/site.json';
+
+const { post, locale = defaultLocale } = Astro.props;
+const { Content } = await post.render();
+const t = getTranslations(locale);
+const isAr = locale === 'ar';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": post.data.title,
+  "description": post.data.description,
+  "image": `${siteConfig.baseUrl}${post.data.image}`,
+  "datePublished": post.data.date.toISOString(),
+  "author": {
+    "@type": "Person",
+    "name": post.data.author
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": t.nav.home,
+      "item": `${siteConfig.baseUrl}${getLocalizedUrl('/', locale)}`
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": t.nav.blog,
+      "item": `${siteConfig.baseUrl}${getLocalizedUrl('/blog', locale)}`
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": post.data.title,
+      "item": Astro.url.href
+    }
+  ]
+};
+---
+
+<BaseLayout locale={locale} title={`${post.data.title} | ${t.site.title.split('|')[0]}`} description={post.data.description} schema={articleSchema}>
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} slot="head" />
+
+  <article class="container py-16 max-w-4xl">
+    <div class="bg-[#161e31]/85 border border-[rgba(212,175,55,0.22)] p-8 md:p-14 rounded-3xl shadow-2xl">
+      <div class="flex items-center gap-2 mb-4 text-xs font-bold text-[#fbe8a6]">
+        <a href={getLocalizedUrl('/blog', locale)} class="hover:underline">{t.nav.blog}</a> • <span>{post.data.category}</span>
+      </div>
+
+      <h1 class="text-3xl md:text-4xl font-black text-white mb-4 leading-tight">{post.data.title}</h1>
+      
+      <div class="text-sm text-slate-400 mb-8 pb-8 border-b border-white/10 flex justify-between items-center">
+        <span>✍️ {post.data.author}</span>
+        <span>📅 {new Date(post.data.date).toLocaleDateString(isAr ? 'ar-DE' : 'en-US')}</span>
+      </div>
+
+      <div class="prose prose-invert prose-gold max-w-none text-slate-200 leading-relaxed space-y-6">
+        <Content />
+      </div>
+
+      <div class="mt-12 pt-8 border-t border-white/10 text-center">
+        <a href={getLocalizedUrl('/blog', locale)} class="btn-secondary inline-flex items-center gap-2">
+          {isAr ? '→ العودة إلى قائمة المقالات' : '← Back to Blog Listing'}
+        </a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

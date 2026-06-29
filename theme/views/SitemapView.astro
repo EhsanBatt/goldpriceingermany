@@ -1,0 +1,52 @@
+---
+import BaseLayout from '~theme/components/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { supportedLocales, defaultLocale, getLocalizedUrl } from '~theme/i18n/utils';
+import siteConfig from '@/config/site.json';
+
+const { locale = defaultLocale } = Astro.props;
+const isAr = locale === 'ar';
+const posts = await getCollection('blog');
+
+const staticRoutes = ['/', '/about-us', '/contact-us', '/terms', '/privacy', '/blog'];
+---
+
+<BaseLayout locale={locale} title={`Sitemap | Gold Price Germany`}>
+  <div class="container py-16 max-w-4xl">
+    <div class="bg-[#161e31]/80 border border-[rgba(212,175,55,0.22)] p-8 md:p-12 rounded-3xl shadow-2xl space-y-8">
+      <h1 class="text-4xl font-black text-white">🗺️ Sitemap</h1>
+
+      <div>
+        <h2 class="text-2xl font-bold text-[#d4af37] mb-4 border-b border-white/10 pb-2">🏠 {isAr ? 'الصفحات الرئيسية والمحلية' : 'Core & Localized Pages'}</h2>
+        <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 list-none p-0">
+          {supportedLocales.flatMap(loc => 
+            staticRoutes.map(route => (
+              <li>
+                <a href={getLocalizedUrl(route, loc)} class="text-slate-300 hover:text-[#fbe8a6] transition-colors flex items-center gap-2">
+                  <span class="text-xs bg-black/40 px-2 py-0.5 rounded text-[#d4af37] font-mono">{loc.toUpperCase()}</span>
+                  <span>{route === '/' ? (loc === 'ar' ? 'الرئيسية' : 'Home') : route}</span>
+                </a>
+              </li>
+            ))
+          )}
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-bold text-[#d4af37] mb-4 border-b border-white/10 pb-2">📰 {isAr ? 'مقالات وأدلة الذهب' : 'Blog Articles'}</h2>
+        <ul class="space-y-2 list-none p-0">
+          {supportedLocales.flatMap(loc =>
+            posts.map(post => (
+              <li>
+                <a href={getLocalizedUrl(`/blog/${post.slug}`, loc)} class="text-slate-300 hover:text-[#fbe8a6] transition-colors flex items-center gap-2">
+                  <span class="text-xs bg-black/40 px-2 py-0.5 rounded text-[#d4af37] font-mono">{loc.toUpperCase()}</span>
+                  <span>{post.data.title}</span>
+                </a>
+              </li>
+            ))
+          )}
+        </ul>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

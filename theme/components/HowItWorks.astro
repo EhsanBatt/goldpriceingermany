@@ -1,0 +1,52 @@
+---
+import { getTranslations } from '~theme/i18n';
+import { defaultLocale } from '~theme/i18n/utils';
+
+const { locale = defaultLocale } = Astro.props;
+const t = getTranslations(locale);
+const hw = t.howItWorks || {};
+const isAr = locale === 'ar';
+---
+
+<section class="py-20 bg-[#0b111e] border-t border-white/10">
+  <div class="container max-w-6xl">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">💡 {hw.title || (isAr ? 'كيف تستثمر في الذهب بذكاء وبدون ضرائب؟' : 'How to Invest in Gold Wisely & Tax-Free')}</h2>
+      <p class="text-slate-300 text-lg leading-relaxed">{hw.subtitle || (isAr ? 'خطوات عملية ومجربة تضمن لك شراء الذهب الاستثماري في ألمانيا بأفضل سعر وأعلى عائد أمان.' : 'Proven steps to buy investment bullion in Germany at the best spot price with total security.')}</p>
+      <slot name="intro" />
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Step 1 -->
+      <div class="bg-[#131c2e] border-2 border-white/10 hover:border-[#d4af37] p-8 rounded-3xl transition-all duration-300 shadow-xl flex flex-col justify-between group">
+        <div>
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#d4af37] to-[#aa771c] text-[#0f172a] flex items-center justify-center font-black text-2xl mb-6 shadow-lg group-hover:scale-110 transition-transform">1</div>
+          <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-[#fbe8a6] transition-colors">{hw.step1Title || (isAr ? 'اختر الذهب الاستثماري عيار 24' : 'Choose 24k Bullion')}</h3>
+          <p class="text-slate-300 text-base leading-relaxed">{hw.step1Desc || (isAr ? 'تأكد أن سبيكتك أو عملتك الذهبية بنسبة نقاوة 999.9 لتستفيد من الإعفاء الكامل من ضريبة القيمة المضافة (MwSt-frei).' : 'Ensure your bullion bar or coin is 999.9 purity to benefit from 100% VAT exemption in Germany.')}</p>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="bg-[#131c2e] border-2 border-white/10 hover:border-[#d4af37] p-8 rounded-3xl transition-all duration-300 shadow-xl flex flex-col justify-between group">
+        <div>
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#d4af37] to-[#aa771c] text-[#0f172a] flex items-center justify-center font-black text-2xl mb-6 shadow-lg group-hover:scale-110 transition-transform">2</div>
+          <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-[#fbe8a6] transition-colors">{hw.step2Title || (isAr ? 'قارن السعر اللحظي بالمصنعية' : 'Compare Live Spot Spread')}</h3>
+          <p class="text-slate-300 text-base leading-relaxed">{hw.step2Desc || (isAr ? 'استخدم حاسبتنا المباشرة لمقارنة سعر البورصة الفوري مع الهامش (Aufgeld) الذي يطلبه التاجر قبل إتمام الصفقة.' : 'Use our live calculator to compare spot exchange value against dealer premium before finalizing purchase.')}</p>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="bg-[#131c2e] border-2 border-white/10 hover:border-[#d4af37] p-8 rounded-3xl transition-all duration-300 shadow-xl flex flex-col justify-between group">
+        <div>
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#d4af37] to-[#aa771c] text-[#0f172a] flex items-center justify-center font-black text-2xl mb-6 shadow-lg group-hover:scale-110 transition-transform">3</div>
+          <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-[#fbe8a6] transition-colors">{hw.step3Title || (isAr ? 'احتفظ بالفاتورة لأكثر من عام' : 'Hold Over 12 Months')}</h3>
+          <p class="text-slate-300 text-base leading-relaxed">{hw.step3Desc || (isAr ? 'احتفظ بفاتورة الشراء الرسمية لمدة 12 شهراً ويوم واحد لتصبح جميع أرباحك الرأسمالية معفاة 100% من ضريبة الدخل.' : 'Keep official invoice for 12 months and 1 day so all capital gains become 100% exempt from income tax.')}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-12 text-center">
+      <slot />
+    </div>
+  </div>
+</section>

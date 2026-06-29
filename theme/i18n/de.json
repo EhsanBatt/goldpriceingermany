@@ -1,0 +1,59 @@
+{
+  "site": {
+    "title": "Goldpreis in Deutschland aktuell | Live Goldkurs in Euro",
+    "description": "Verfolgen Sie den aktuellen Goldpreis in Deutschland in Euro und Dollar. Live-Updates pro Gramm für 333er, 585er, 750er, 900er und Feinunze mit Rechner und Chart.",
+    "footerDesc": "Fachportal für Live-Goldpreise in Euro und Fremdwährungen in Deutschland zur Unterstützung von Verbrauchern und Anlegern."
+  },
+  "nav": {
+    "home": "Startseite",
+    "livePrices": "Live Kurse",
+    "chart": "Live Chart",
+    "calculator": "Goldrechner",
+    "alloys": "Legierungen & Altgold",
+    "blog": "Ratgeber",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "terms": "AGB",
+    "privacy": "Datenschutz"
+  },
+  "common": {
+    "live": "LIVE / Markt geöffnet",
+    "readMore": "Weiterlesen",
+    "calculate": "Goldwert berechnen",
+    "viewChart": "Preisentwicklung ansehen",
+    "copyright": "Alle Rechte vorbehalten © {year} | Goldpreis in Deutschland - Optimiert für Marktanalysen",
+    "language": "Sprache"
+  },
+  "faq": [
+    {
+      "question": "Wie hoch ist der aktuelle Goldpreis für 585er (14 Karat) in Deutschland?",
+      "answer": "Der Preis für 585er Gold liegt aktuell bei ca. 42,85 € pro Gramm. Es ist die häufigste Legierung für deutschen Schmuck.",
+      "display": true
+    },
+    {
+      "question": "Ist der Kauf von Goldbarren in Deutschland mehrwertsteuerfrei?",
+      "answer": "Ja, gemäß dem deutschen Umsatzsteuergesetz ist Anlagegold (Barren ab 995er und zertifizierte Goldmünzen) komplett von der 19% MwSt. befreit.",
+      "display": true
+    },
+    {
+      "question": "Was ist der Unterschied zwischen Ankauf und Verkauf (Spread)?",
+      "answer": "Der Verkaufspreis ist der Betrag, den Sie beim Händler zahlen, während der Ankaufspreis der Schmelz- oder Rücknahmepreis des Händlers ist.",
+      "display": true
+    },
+    {
+      "question": "Muss man Gold am Flughafen beim Zoll anmelden?",
+      "answer": "Ja, bei der Ein- und Ausreise in bzw. aus der EU müssen Barmittel und Edelmetalle ab einem Gesamtwert von 10.000 € pro Person angemeldet werden.",
+      "display": true
+    }
+  ],
+  "howItWorks": {
+    "title": "Wie unser Goldpreis-Portal funktioniert",
+    "subtitle": "Direkte Anbindung an Börsendaten und zertifizierte Altgoldpreise in Echtzeit",
+    "step1Title": "Echtzeit Börsen-Feed",
+    "step1Desc": "Wir empfangen globale Spotkurse für die Feinunze und konvertieren diese sofort in Euro.",
+    "step2Title": "Präzise Legierungsrechnung",
+    "step2Desc": "Exakte Grammkurse für 999er, 916er, 875er, 750er, 585er und 333er Gold.",
+    "step3Title": "Erweiterte Analyse-Tools",
+    "step3Desc": "Interaktive Rechner, Charts und Schmelzpreistabellen für fundierte Entscheidungen."
+  }
+}
