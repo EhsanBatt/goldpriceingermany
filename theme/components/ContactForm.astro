@@ -5,47 +5,47 @@ import siteConfig from '@/config/site.json';
 
 const { locale = defaultLocale } = Astro.props;
 const t = getTranslations(locale);
-const isAr = locale === 'ar';
+const c = t.contact;
 ---
 
-<div class="bg-[#161e31]/80 border border-[rgba(212,175,55,0.22)] p-8 rounded-3xl shadow-2xl max-w-2xl mx-auto">
-  <form id="contact-form" class="flex flex-col gap-6">
+<div class="card bg-white p-8 max-w-2xl mx-auto">
+  <form id="contact-form" class="flex flex-col gap-6" data-sending-label={c.sending} data-submit-label={c.submit} data-success-label={c.success} data-error-label={c.error}>
     <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
     <input type="hidden" name="subject" value="New Contact Form Submission - Gold Price Germany" />
-    
+
     <div class="flex flex-col gap-2">
-      <label for="name" class="text-sm font-semibold text-slate-300">{isAr ? 'الاسم الكامل:' : 'Full Name:'}</label>
+      <label for="name" class="text-sm font-semibold text-slate-700">{c.nameLabel}</label>
       <input
         type="text"
         id="name"
         name="name"
         required
-        placeholder={isAr ? 'أدخل اسمك هنا' : 'Enter your name'}
-        class="bg-[#070a12] border border-white/10 text-white p-3.5 rounded-xl font-medium focus:outline-none focus:border-[#d4af37] transition-colors"
+        placeholder={c.namePlaceholder}
+        class="bg-slate-50 border border-slate-200 text-slate-900 p-3.5 rounded-xl font-medium focus:outline-none focus:border-amber-500 transition-colors"
       />
     </div>
 
     <div class="flex flex-col gap-2">
-      <label for="email" class="text-sm font-semibold text-slate-300">{isAr ? 'البريد الإلكتروني:' : 'Email Address:'}</label>
+      <label for="email" class="text-sm font-semibold text-slate-700">{c.emailLabel}</label>
       <input
         type="email"
         id="email"
         name="email"
         required
-        placeholder={isAr ? 'example@email.com' : 'example@email.com'}
-        class="bg-[#070a12] border border-white/10 text-white p-3.5 rounded-xl font-medium focus:outline-none focus:border-[#d4af37] transition-colors"
+        placeholder={c.emailPlaceholder}
+        class="bg-slate-50 border border-slate-200 text-slate-900 p-3.5 rounded-xl font-medium focus:outline-none focus:border-amber-500 transition-colors"
       />
     </div>
 
     <div class="flex flex-col gap-2">
-      <label for="message" class="text-sm font-semibold text-slate-300">{isAr ? 'الرسالة أو الاستفسار:' : 'Message:'}</label>
+      <label for="message" class="text-sm font-semibold text-slate-700">{c.messageLabel}</label>
       <textarea
         id="message"
         name="message"
         rows="5"
         required
-        placeholder={isAr ? 'اكتب رسالتك أو استفسارك هنا...' : 'Write your inquiry here...'}
-        class="bg-[#070a12] border border-white/10 text-white p-3.5 rounded-xl font-medium focus:outline-none focus:border-[#d4af37] transition-colors resize-y"
+        placeholder={c.messagePlaceholder}
+        class="bg-slate-50 border border-slate-200 text-slate-900 p-3.5 rounded-xl font-medium focus:outline-none focus:border-amber-500 transition-colors resize-y"
       ></textarea>
     </div>
 
@@ -54,14 +54,14 @@ const isAr = locale === 'ar';
       id="submit-btn"
       class="btn-primary w-full justify-center py-4 text-base font-bold"
     >
-      ✉️ {isAr ? 'إرسال الرسالة الآن' : 'Send Message Now'}
+      {c.submit}
     </button>
 
-    <div id="form-status" class="text-center font-bold text-sm hidden p-3 rounded-xl"></div>
+    <div id="form-status" class="text-center font-bold text-sm hidden p-3 rounded-xl" role="status" aria-live="polite"></div>
 
-    <div class="text-center text-xs text-slate-400 border-t border-white/5 pt-4">
-      {isAr ? 'أو يمكنك مراسلتنا مباشرة عبر البريد الإلكتروني:' : 'Or reach us directly via email:'}
-      <a href={`mailto:${siteConfig.contactEmail}`} class="text-[#fbe8a6] underline font-bold ml-1">{siteConfig.contactEmail}</a>
+    <div class="text-center text-xs text-slate-500 border-t border-slate-100 pt-4">
+      {c.directEmail}
+      <a href={`mailto:${siteConfig.contactEmail}`} class="text-amber-700 underline font-bold ms-1">{siteConfig.contactEmail}</a>
     </div>
   </form>
 </div>
@@ -71,15 +71,18 @@ const isAr = locale === 'ar';
     const form = document.getElementById('contact-form') as HTMLFormElement;
     const btn = document.getElementById('submit-btn') as HTMLButtonElement;
     const status = document.getElementById('form-status');
+    if (!form) return;
 
-    form?.addEventListener('submit', async (e) => {
+    const { sendingLabel, submitLabel, successLabel, errorLabel } = form.dataset;
+
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (!btn || !status) return;
 
       btn.disabled = true;
-      btn.innerHTML = '⏳ جارٍ الإرسال... / Sending...';
-      status.className = 'text-center font-bold text-sm block p-3 rounded-xl bg-blue-900/40 text-blue-300 border border-blue-500/30';
-      status.textContent = 'جارٍ إرسال رسالتك... / Sending your message...';
+      btn.textContent = sendingLabel || 'Sending...';
+      status.className = 'text-center font-bold text-sm block p-3 rounded-xl bg-blue-50 text-blue-700 border border-blue-200';
+      status.textContent = sendingLabel || 'Sending...';
 
       const formData = new FormData(form);
 
@@ -91,18 +94,18 @@ const isAr = locale === 'ar';
         const data = await response.json();
 
         if (response.status === 200) {
-          status.className = 'text-center font-bold text-sm block p-3 rounded-xl bg-emerald-900/40 text-emerald-300 border border-emerald-500/30';
-          status.textContent = '✅ تم إرسال رسالتك بنجاح! سنتواصل معك قريباً. / Message sent successfully!';
+          status.className = 'text-center font-bold text-sm block p-3 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200';
+          status.textContent = successLabel || 'Message sent successfully!';
           form.reset();
         } else {
           throw new Error(data.message || 'Submission failed');
         }
       } catch (err) {
-        status.className = 'text-center font-bold text-sm block p-3 rounded-xl bg-red-900/40 text-red-300 border border-red-500/30';
-        status.textContent = '❌ حدث خطأ أثناء الإرسال. يرجى المراسلة عبر البريد المباشر.';
+        status.className = 'text-center font-bold text-sm block p-3 rounded-xl bg-red-50 text-red-700 border border-red-200';
+        status.textContent = errorLabel || 'Something went wrong.';
       } finally {
         btn.disabled = false;
-        btn.innerHTML = '✉️ إرسال الرسالة الآن / Send Message Now';
+        btn.textContent = submitLabel || 'Send Message';
       }
     });
   }

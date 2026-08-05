@@ -12,18 +12,18 @@ const staticRoutes = ['/', '/about-us', '/contact-us', '/terms', '/privacy', '/b
 ---
 
 <BaseLayout locale={locale} title={`Sitemap | Gold Price Germany`}>
-  <div class="container py-16 max-w-4xl">
-    <div class="bg-[#161e31]/80 border border-[rgba(212,175,55,0.22)] p-8 md:p-12 rounded-3xl shadow-2xl space-y-8">
-      <h1 class="text-4xl font-black text-white">🗺️ Sitemap</h1>
+  <div class="container py-16 md:py-24 max-w-4xl">
+    <div class="card bg-white p-8 md:p-12 space-y-8">
+      <h1 class="text-4xl font-extrabold text-slate-900">Sitemap</h1>
 
       <div>
-        <h2 class="text-2xl font-bold text-[#d4af37] mb-4 border-b border-white/10 pb-2">🏠 {isAr ? 'الصفحات الرئيسية والمحلية' : 'Core & Localized Pages'}</h2>
+        <h2 class="text-2xl font-bold text-amber-700 mb-4 border-b border-slate-100 pb-2">{isAr ? 'الصفحات الرئيسية والمحلية' : 'Core & Localized Pages'}</h2>
         <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 list-none p-0">
-          {supportedLocales.flatMap(loc => 
+          {supportedLocales.flatMap(loc =>
             staticRoutes.map(route => (
               <li>
-                <a href={getLocalizedUrl(route, loc)} class="text-slate-300 hover:text-[#fbe8a6] transition-colors flex items-center gap-2">
-                  <span class="text-xs bg-black/40 px-2 py-0.5 rounded text-[#d4af37] font-mono">{loc.toUpperCase()}</span>
+                <a href={getLocalizedUrl(route, loc)} class="text-slate-600 hover:text-amber-700 transition-colors flex items-center gap-2">
+                  <span class="text-xs bg-slate-100 px-2 py-0.5 rounded text-amber-700 font-mono">{loc.toUpperCase()}</span>
                   <span>{route === '/' ? (loc === 'ar' ? 'الرئيسية' : 'Home') : route}</span>
                 </a>
               </li>
@@ -33,13 +33,13 @@ const staticRoutes = ['/', '/about-us', '/contact-us', '/terms', '/privacy', '/b
       </div>
 
       <div>
-        <h2 class="text-2xl font-bold text-[#d4af37] mb-4 border-b border-white/10 pb-2">📰 {isAr ? 'مقالات وأدلة الذهب' : 'Blog Articles'}</h2>
+        <h2 class="text-2xl font-bold text-amber-700 mb-4 border-b border-slate-100 pb-2">{isAr ? 'مقالات وأدلة الذهب' : 'Blog Articles'}</h2>
         <ul class="space-y-2 list-none p-0">
           {supportedLocales.flatMap(loc =>
             posts.map(post => (
               <li>
-                <a href={getLocalizedUrl(`/blog/${post.slug}`, loc)} class="text-slate-300 hover:text-[#fbe8a6] transition-colors flex items-center gap-2">
-                  <span class="text-xs bg-black/40 px-2 py-0.5 rounded text-[#d4af37] font-mono">{loc.toUpperCase()}</span>
+                <a href={getLocalizedUrl(`/blog/${post.slug}`, loc)} class="text-slate-600 hover:text-amber-700 transition-colors flex items-center gap-2">
+                  <span class="text-xs bg-slate-100 px-2 py-0.5 rounded text-amber-700 font-mono">{loc.toUpperCase()}</span>
                   <span>{post.data.title}</span>
                 </a>
               </li>

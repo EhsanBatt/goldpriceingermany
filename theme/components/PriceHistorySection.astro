@@ -1,0 +1,185 @@
+---
+import { defaultLocale } from '~theme/i18n/utils';
+
+const { locale = defaultLocale } = Astro.props;
+const isAr = locale === 'ar';
+const isDe = locale === 'de';
+const isTr = locale === 'tr';
+
+// Units table
+const unitsTitle = isAr ? 'أسعار الذهب بوحدات الوزن الأخرى' : isDe ? 'Goldpreise nach anderen Gewichtseinheiten' : isTr ? 'Diğer Ağırlık Birimlerine Göre Altın Fiyatları' : 'Gold Prices by Other Weight Units';
+const unitsDesc = isAr ? 'من الجنيه الذهب إلى طن الذهب، تحويل فوري لجميع الوحدات الشائعة باليورو والدولار.' : isDe ? 'Vom Goldpfund bis zur Goldtonne – sofortige Umrechnung aller gängigen Einheiten in EUR und USD.' : isTr ? 'Altın liradan altın tona kadar tüm yaygın birimlerin EUR ve USD cinsinden anlık dönüşümü.' : 'From the gold pound to the gold ton, instant conversion of all common units in EUR and USD.';
+const unitsColUnit = isAr ? 'الوحدة' : isDe ? 'Einheit' : isTr ? 'Birim' : 'Unit';
+const unitsColEur = isAr ? 'السعر باليورو' : isDe ? 'Preis in EUR' : isTr ? 'EUR Fiyatı' : 'Price in EUR';
+const unitsColUsd = isAr ? 'السعر بالدولار' : isDe ? 'Preis in USD' : isTr ? 'USD Fiyatı' : 'Price in USD';
+
+const uOunce24 = isAr ? 'أونصة عيار 24 (31.1 جم)' : isDe ? 'Feinunze 24K (31,1 g)' : isTr ? '24 Ayar Ons (31,1 g)' : '24k Ounce (31.1g)';
+const uOunce21 = isAr ? 'أونصة عيار 21 (31.1 جم)' : isDe ? 'Unze 21K (31,1 g)' : isTr ? '21 Ayar Ons (31,1 g)' : '21k Ounce (31.1g)';
+const uPound = isAr ? 'الجنيه الذهب (8 جم، عيار 21)' : isDe ? 'Goldpfund (8 g, 21K)' : isTr ? 'Altın Lira (8 g, 21 Ayar)' : 'Gold Pound Coin (8g, 21k)';
+const uBar100 = isAr ? 'سبيكة 100 جرام (عيار 24)' : isDe ? '100g-Barren (24K)' : isTr ? '100g Külçe (24 Ayar)' : '100g Bar (24k)';
+const uKilo = isAr ? 'كيلوغرام الذهب (عيار 24)' : isDe ? 'Kilo Gold (24K)' : isTr ? 'Kilogram Altın (24 Ayar)' : 'Gold Kilogram (24k)';
+const uTon = isAr ? 'طن الذهب (عيار 24)' : isDe ? 'Tonne Gold (24K)' : isTr ? 'Ton Altın (24 Ayar)' : 'Gold Ton (24k)';
+const uTola = isAr ? 'تولة الذهب (11.66 جم، عيار 24)' : isDe ? 'Tola Gold (11,66 g, 24K)' : isTr ? 'Tola Altın (11,66 g, 24 Ayar)' : 'Gold Tola (11.66g, 24k)';
+
+const unitRows = [
+  { label: uOunce24, eur: '2,284.50 €', usd: '2,467.26 $' },
+  { label: uOunce21, eur: '1,999.02 €', usd: '2,158.94 $' },
+  { label: uPound, eur: '514.16 €', usd: '555.29 $' },
+  { label: uBar100, eur: '7,345.00 €', usd: '7,932.60 $' },
+  { label: uKilo, eur: '73,450.00 €', usd: '79,326.00 $' },
+  { label: uTola, eur: '856.71 €', usd: '925.25 $' },
+  { label: uTon, eur: '73,450,000 €', usd: '79,326,000 $' },
+];
+
+// Day-by-day history table
+const historyTitle = isAr ? 'سعر الذهب في الأيام السابقة' : isDe ? 'Goldpreis der letzten Tage' : isTr ? 'Önceki Günlerde Altın Fiyatı' : 'Gold Price in Previous Days';
+const historyDesc = isAr ? 'تتبع حركة سعر جرام الذهب بجميع الأعيرة وسعر الأونصة خلال الأيام الستة الماضية.' : isDe ? 'Verfolgen Sie die Entwicklung des Grammpreises für alle Karat sowie den Unzenpreis der letzten sechs Tage.' : isTr ? 'Son altı gündeki tüm ayarlar için gram fiyatı ve ons fiyatındaki hareketi takip edin.' : 'Track the gram price across all karats and the ounce price over the last six days.';
+const historyColDate = isAr ? 'التاريخ' : isDe ? 'Datum' : isTr ? 'Tarih' : 'Date';
+const historyColOunce = isAr ? 'الأونصة' : isDe ? 'Unze' : isTr ? 'Ons' : 'Ounce';
+const historyColPound = isAr ? 'الجنيه الذهب' : isDe ? 'Goldpfund' : isTr ? 'Altın Lira' : 'Gold Pound';
+
+const historyRows = [
+  { date: isAr ? '01 يوليو 2026 (اليوم)' : isDe ? '01. Juli 2026 (Heute)' : isTr ? '01 Temmuz 2026 (Bugün)' : '01 Jul 2026 (Today)', k24: '73.45', k22: '67.33', k21: '64.27', k18: '55.09', k14: '42.85', ounce: '2,284.50', pound: '514.16' },
+  { date: isAr ? '30 يونيو 2026' : isDe ? '30. Juni 2026' : isTr ? '30 Haziran 2026' : '30 Jun 2026', k24: '74.02', k22: '67.85', k21: '64.77', k18: '55.52', k14: '43.18', ounce: '2,302.28', pound: '518.14' },
+  { date: isAr ? '29 يونيو 2026' : isDe ? '29. Juni 2026' : isTr ? '29 Haziran 2026' : '29 Jun 2026', k24: '74.15', k22: '67.97', k21: '64.88', k18: '55.61', k14: '43.25', ounce: '2,306.32', pound: '519.05' },
+  { date: isAr ? '28 يونيو 2026' : isDe ? '28. Juni 2026' : isTr ? '28 Haziran 2026' : '28 Jun 2026', k24: '73.88', k22: '67.72', k21: '64.64', k18: '55.41', k14: '43.10', ounce: '2,297.93', pound: '517.16' },
+  { date: isAr ? '27 يونيو 2026' : isDe ? '27. Juni 2026' : isTr ? '27 Haziran 2026' : '27 Jun 2026', k24: '73.60', k22: '67.47', k21: '64.40', k18: '55.20', k14: '42.93', ounce: '2,289.22', pound: '515.20' },
+  { date: isAr ? '26 يونيو 2026' : isDe ? '26. Juni 2026' : isTr ? '26 Haziran 2026' : '26 Jun 2026', k24: '73.91', k22: '67.75', k21: '64.67', k18: '55.43', k14: '43.11', ounce: '2,298.86', pound: '517.37' },
+];
+
+// Yearly comparison table
+const yearlyTitle = isAr ? 'سعر الذهب اليوم مقارنة بالسنوات السابقة' : isDe ? 'Goldpreis heute im Vergleich zu Vorjahren' : isTr ? 'Bugünkü Altın Fiyatının Geçmiş Yıllarla Karşılaştırması' : "Today's Gold Price vs. Previous Years";
+const yearlyDesc = isAr ? 'مقارنة سعر أونصة وجرام الذهب بنفس التاريخ في السنوات الخمس الماضية لفهم الاتجاه العام للسوق.' : isDe ? 'Vergleich des Unzen- und Grammpreises am selben Datum der letzten fünf Jahre, um den Markttrend zu verstehen.' : isTr ? 'Piyasa trendini anlamak için son beş yılın aynı tarihindeki ons ve gram altın fiyatının karşılaştırması.' : "Comparing the ounce and gram gold price on the same date over the past five years to understand the market trend.";
+const yearlyColDate = isAr ? 'التاريخ' : isDe ? 'Datum' : isTr ? 'Tarih' : 'Date';
+const yearlyColOunce = isAr ? 'سعر الأونصة' : isDe ? 'Unzenpreis' : isTr ? 'Ons Fiyatı' : 'Ounce Price';
+const yearlyColChange = isAr ? 'التغير' : isDe ? 'Veränderung' : isTr ? 'Değişim' : 'Change';
+
+const yearlyRows = [
+  { date: isAr ? '01 يوليو 2026 (اليوم)' : isDe ? '01. Juli 2026 (Heute)' : isTr ? '01 Temmuz 2026 (Bugün)' : '01 Jul 2026 (Today)', k24: '73.45', k21: '64.27', ounce: '2,284.50', change: null },
+  { date: isAr ? '01 يوليو 2025' : isDe ? '01. Juli 2025' : isTr ? '01 Temmuz 2025' : '01 Jul 2025', k24: '60.10', k21: '52.59', ounce: '1,869.32', change: -18.2 },
+  { date: isAr ? '01 يوليو 2024' : isDe ? '01. Juli 2024' : isTr ? '01 Temmuz 2024' : '01 Jul 2024', k24: '46.05', k21: '40.29', ounce: '1,432.32', change: -23.4 },
+  { date: isAr ? '01 يوليو 2023' : isDe ? '01. Juli 2023' : isTr ? '01 Temmuz 2023' : '01 Jul 2023', k24: '37.30', k21: '32.64', ounce: '1,160.16', change: -19.0 },
+  { date: isAr ? '01 يوليو 2022' : isDe ? '01. Juli 2022' : isTr ? '01 Temmuz 2022' : '01 Jul 2022', k24: '36.80', k21: '32.20', ounce: '1,144.61', change: -1.3 },
+];
+---
+
+<!-- Weight Units Table -->
+<section class="py-16 md:py-24 bg-white" id="units">
+  <div class="container max-w-5xl">
+    <div class="text-center mb-14">
+      <h2 class="text-3xl font-extrabold text-slate-900 mb-4">{unitsTitle}</h2>
+      <p class="text-slate-600 text-lg max-w-3xl mx-auto">{unitsDesc}</p>
+    </div>
+
+    <div class="card bg-white overflow-hidden">
+      <div class="p-6 overflow-x-auto">
+        <table class="w-full text-right border-collapse min-w-[480px]">
+          <thead>
+            <tr class="border-b-2 border-slate-200 text-slate-500 text-sm font-bold">
+              <th class="py-4 px-3">{unitsColUnit}</th>
+              <th class="py-4 px-3">{unitsColEur}</th>
+              <th class="py-4 px-3">{unitsColUsd}</th>
+            </tr>
+          </thead>
+          <tbody class="text-sm font-semibold divide-y divide-slate-100">
+            {unitRows.map(row => (
+              <tr class="hover:bg-slate-50">
+                <td class="py-4 px-3 font-bold text-slate-900">{row.label}</td>
+                <td class="accent-text font-black">{row.eur}</td>
+                <td class="text-slate-500 font-bold">{row.usd}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Day-by-day price history -->
+<section class="py-16 md:py-24 bg-slate-50 border-y border-slate-200" id="history">
+  <div class="container max-w-6xl">
+    <div class="text-center mb-14">
+      <h2 class="text-3xl font-extrabold text-slate-900 mb-4">{historyTitle}</h2>
+      <p class="text-slate-600 text-lg max-w-3xl mx-auto">{historyDesc}</p>
+    </div>
+
+    <div class="card bg-white overflow-hidden">
+      <div class="p-6 overflow-x-auto">
+        <table class="w-full text-right border-collapse min-w-[720px]">
+          <thead>
+            <tr class="border-b-2 border-slate-200 text-slate-500 text-sm font-bold">
+              <th class="py-4 px-3">{historyColDate}</th>
+              <th class="py-4 px-3">24k</th>
+              <th class="py-4 px-3">22k</th>
+              <th class="py-4 px-3">21k</th>
+              <th class="py-4 px-3">18k</th>
+              <th class="py-4 px-3">14k</th>
+              <th class="py-4 px-3">{historyColOunce}</th>
+              <th class="py-4 px-3">{historyColPound}</th>
+            </tr>
+          </thead>
+          <tbody class="text-sm font-semibold divide-y divide-slate-100">
+            {historyRows.map((row, idx) => (
+              <tr class={`hover:bg-slate-50 ${idx === 0 ? 'bg-amber-50/40' : ''}`}>
+                <td class="py-4 px-3 font-bold text-slate-900">{row.date}</td>
+                <td class={idx === 0 ? 'accent-text font-black' : 'text-slate-700 font-bold'}>{row.k24} €</td>
+                <td class="text-slate-700 font-bold">{row.k22} €</td>
+                <td class="text-slate-700 font-bold">{row.k21} €</td>
+                <td class="text-slate-700 font-bold">{row.k18} €</td>
+                <td class="text-slate-700 font-bold">{row.k14} €</td>
+                <td class="text-slate-900 font-bold">{row.ounce} €</td>
+                <td class="text-slate-700 font-bold">{row.pound} €</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Yearly comparison -->
+<section class="py-16 md:py-24 bg-white" id="yearly">
+  <div class="container max-w-5xl">
+    <div class="text-center mb-14">
+      <h2 class="text-3xl font-extrabold text-slate-900 mb-4">{yearlyTitle}</h2>
+      <p class="text-slate-600 text-lg max-w-3xl mx-auto">{yearlyDesc}</p>
+    </div>
+
+    <div class="card bg-white overflow-hidden">
+      <div class="p-6 overflow-x-auto">
+        <table class="w-full text-right border-collapse min-w-[480px]">
+          <thead>
+            <tr class="border-b-2 border-slate-200 text-slate-500 text-sm font-bold">
+              <th class="py-4 px-3">{yearlyColDate}</th>
+              <th class="py-4 px-3">{yearlyColOunce}</th>
+              <th class="py-4 px-3">24k</th>
+              <th class="py-4 px-3">21k</th>
+              <th class="py-4 px-3">{yearlyColChange}</th>
+            </tr>
+          </thead>
+          <tbody class="text-sm font-semibold divide-y divide-slate-100">
+            {yearlyRows.map((row, idx) => (
+              <tr class={`hover:bg-slate-50 ${idx === 0 ? 'bg-amber-50/40' : ''}`}>
+                <td class="py-4 px-3 font-bold text-slate-900">{row.date}</td>
+                <td class="text-slate-900 font-bold">{row.ounce} €</td>
+                <td class={idx === 0 ? 'accent-text font-black' : 'text-slate-700 font-bold'}>{row.k24} €</td>
+                <td class="text-slate-700 font-bold">{row.k21} €</td>
+                <td class="font-bold">
+                  {row.change === null ? (
+                    <span class="text-slate-400">—</span>
+                  ) : (
+                    <span class={row.change >= 0 ? 'text-emerald-700' : 'text-red-600'}>
+                      {row.change >= 0 ? '▲' : '▼'} {Math.abs(row.change)}%
+                    </span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

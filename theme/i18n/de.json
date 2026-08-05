@@ -2,7 +2,8 @@
   "site": {
     "title": "Goldpreis in Deutschland aktuell | Live Goldkurs in Euro",
     "description": "Verfolgen Sie den aktuellen Goldpreis in Deutschland in Euro und Dollar. Live-Updates pro Gramm für 333er, 585er, 750er, 900er und Feinunze mit Rechner und Chart.",
-    "footerDesc": "Fachportal für Live-Goldpreise in Euro und Fremdwährungen in Deutschland zur Unterstützung von Verbrauchern und Anlegern."
+    "footerDesc": "Fachportal für Live-Goldpreise in Euro und Fremdwährungen in Deutschland zur Unterstützung von Verbrauchern und Anlegern.",
+    "footerDisclaimer": "Die angezeigten Preise sind Richtwerte auf Basis der globalen Marktentwicklung und können je nach Händler, Juwelier oder Bank in den deutschen Bundesländern leicht abweichen."
   },
   "nav": {
     "home": "Startseite",
@@ -46,6 +47,19 @@
       "display": true
     }
   ],
+  "contact": {
+    "nameLabel": "Vollständiger Name",
+    "namePlaceholder": "Geben Sie Ihren Namen ein",
+    "emailLabel": "E-Mail-Adresse",
+    "emailPlaceholder": "beispiel@email.com",
+    "messageLabel": "Nachricht",
+    "messagePlaceholder": "Schreiben Sie hier Ihre Anfrage...",
+    "submit": "Nachricht senden",
+    "sending": "Wird gesendet...",
+    "success": "Nachricht erfolgreich gesendet! Wir melden uns in Kürze.",
+    "error": "Etwas ist schiefgelaufen. Bitte schreiben Sie uns direkt per E-Mail.",
+    "directEmail": "Oder erreichen Sie uns direkt per E-Mail:"
+  },
   "howItWorks": {
     "title": "Wie unser Goldpreis-Portal funktioniert",
     "subtitle": "Direkte Anbindung an Börsendaten und zertifizierte Altgoldpreise in Echtzeit",

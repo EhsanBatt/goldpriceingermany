@@ -2,7 +2,8 @@
   "site": {
     "title": "Live Gold Price in Germany | EUR & USD Real-time Updates",
     "description": "Track live gold prices in Germany in EUR, USD, and TRY. Real-time updates per gram for 24k, 22k, 21k, 18k and gold ounce with interactive charts and calculator.",
-    "footerDesc": "Dedicated portal providing real-time live gold price coverage in EUR, USD and other currencies across Germany to assist consumers and investors."
+    "footerDesc": "Dedicated portal providing real-time live gold price coverage in EUR, USD and other currencies across Germany to assist consumers and investors.",
+    "footerDisclaimer": "Prices shown are indicative, reflecting global market movement, and may vary slightly by dealer, jeweler, or bank across German states."
   },
   "nav": {
     "home": "Home",
@@ -46,6 +47,19 @@
       "display": true
     }
   ],
+  "contact": {
+    "nameLabel": "Full Name",
+    "namePlaceholder": "Enter your name",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "example@email.com",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Write your inquiry here...",
+    "submit": "Send Message",
+    "sending": "Sending...",
+    "success": "Message sent successfully! We'll get back to you soon.",
+    "error": "Something went wrong. Please email us directly instead.",
+    "directEmail": "Or reach us directly via email:"
+  },
   "howItWorks": {
     "title": "How Gold Price Germany Works",
     "subtitle": "Connecting you directly to Frankfurt exchange market data and certified bullion prices real-time",

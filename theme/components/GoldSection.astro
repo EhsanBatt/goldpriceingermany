@@ -5,174 +5,238 @@ import { defaultLocale } from '~theme/i18n/utils';
 const { locale = defaultLocale } = Astro.props;
 const t = getTranslations(locale);
 const isAr = locale === 'ar';
+const isDe = locale === 'de';
+const isTr = locale === 'tr';
+
+// Localized karat labels
+const k24Label = isAr ? 'جرام 24 قيراط (999)' : isDe ? '24 Karat Gold (999)' : isTr ? '24 Ayar Altın (999)' : '24 Karat Gold (999)';
+const k21Label = isAr ? 'جرام 21 قيراط (875)' : isDe ? '21 Karat Gold (875)' : isTr ? '21 Ayar Altın (875)' : '21 Karat Gold (875)';
+const k18Label = isAr ? 'جرام 18 قيراط (750)' : isDe ? '18 Karat Gold (750)' : isTr ? '18 Ayar Altın (750)' : '18 Karat Gold (750)';
+
+const k24Desc = isAr ? 'سعر الجرام النقي للسبائك والجنيهات الذهبية – معفى تماماً من الضرائب في ألمانيا.' : isDe ? 'Reiner Goldpreis für Barren und Münzen – 100% MwSt-frei in Deutschland.' : isTr ? 'Külçe ve madeni paralar için saf altın fiyatı – Almanya\'da %100 KDV\'den muaf.' : 'Pure gold gram price for bars and bullion coins – 100% VAT-free in Germany.';
+const k21Desc = isAr ? 'العيار المفضل للحلي والمجوهرات الشرقية في محلات الصاغة الألمانية.' : isDe ? 'Der beliebteste Legierungsgrad für nahöstlichen Schmuck in Deutschland.' : isTr ? 'Almanya\'daki kuyumcularda Ortadoğu mücevherleri için en çok tercih edilen ayar.' : 'The most preferred karat for Middle Eastern jewelry in German shops.';
+const k18Desc = isAr ? 'العيار القياسي الأوروبي للمجوهرات الفاخرة المطعمة بالألماس.' : isDe ? 'Europäischer Standardlegierungsgrad für Luxusschmuck mit Diamanten.' : isTr ? 'Avrupa standart ayarı – pırlanta süslemeli lüks mücevherlerde kullanılır.' : 'Standard European alloy for luxury jewelry and diamond settings.';
+
+const k24Tag = isAr ? 'الأكثر طلباً للاستثمار' : isDe ? 'Beste Anlage' : isTr ? 'En İyi Yatırım' : 'Best Investment';
+const ounceLabel = isAr ? 'الأونصة (31.1 جم):' : isDe ? 'Unze (31,1g):' : isTr ? 'Ons (31,1g):' : 'Ounce (31.1g):';
+const purityLabel = isAr ? 'نسبة الذهب النقي:' : isDe ? 'Reinheitsgrad:' : isTr ? 'Saflık Oranı:' : 'Purity Ratio:';
+
+// Ticker labels
+const tickerGoldLabel = isAr ? 'أونصة الذهب (EUR):' : isDe ? 'Goldunze (EUR):' : isTr ? 'Altın Ons (EUR):' : 'Gold Ounce (EUR):';
+const tickerSilverLabel = isAr ? 'الفضة:' : isDe ? 'Silber:' : isTr ? 'Gümüş:' : 'Silver:';
+const tickerExchange = isAr ? 'تحديث مباشر ومستمر لبورصة فرانكفورت' : isDe ? 'Live-Feed Frankfurter Börse' : isTr ? 'Frankfurt Borsası Canlı Akış' : 'Real-time Frankfurt Exchange Live Feed';
+
+// Hero text
+const heroTitle = isAr ? 'سعر الذهب في ألمانيا اليوم' : isDe ? 'Goldpreis in Deutschland Heute' : isTr ? 'Almanya\'da Güncel Altın Fiyatı' : 'Live Gold Price in Germany Today';
+const heroBadge = isAr ? 'الأسعار الرسمية اليوم في السوق الألماني' : isDe ? 'Offizielle Tagespreise im deutschen Markt' : isTr ? 'Almanya piyasasında güncel resmi fiyatlar' : 'Official Today Prices in German Market';
+const heroDesc = isAr ? 'تابع أسعار جرام الذهب باليورو لحظة بلحظة مع إعفاء ضريبي كامل 100% (MwSt-frei) لسبائك الاستثمار.' : isDe ? 'Verfolgen Sie den Goldgrammpreis in EUR in Echtzeit – 100% MwSt-frei auf Anlagegold.' : isTr ? 'EUR cinsinden anlık altın gram fiyatlarını takip edin – yatırım külçelerinde %100 KDV muafiyeti.' : 'Track real-time gold gram prices in EUR with 100% VAT exemption (MwSt-frei) on investment bullion.';
+
+// CTA buttons
+const ctaCalc = isAr ? 'احسب قيمة ذهبك الآن' : isDe ? 'Goldwert jetzt berechnen' : isTr ? 'Altın Değerini Hesapla' : 'Calculate Your Gold Value Now';
+const ctaAlloys = isAr ? 'جدول جميع الأعيرة وسعر الصهر' : isDe ? 'Alle Legierungen & Schmelzwerte' : isTr ? 'Tüm Ayarlar ve Eritme Fiyatları' : 'View All Alloys & Scrap Melt';
+
+// Chart labels
+const chartTitle = isAr ? 'الرسم البياني لحركة أسعار الذهب' : isDe ? 'Interaktives Goldpreis-Diagramm' : isTr ? 'İnteraktif Altın Fiyat Grafiği' : 'Interactive Gold Price Chart';
+const chartDesc = isAr ? 'تتبع التغيرات الزمنية لسعر الجرام عيار 24 باليورو لمساعدتك في اتخاذ قرار الشراء أو البيع في الوقت المثالي.' : isDe ? 'Verfolgen Sie historische 24k-Goldpreisbewegungen pro Gramm in EUR.' : isTr ? '24 ayar altının EUR cinsinden gram fiyat hareketlerini takip edin.' : 'Track live and historical movements of 24k gold per gram in EUR.';
+const chartPeriodToday = isAr ? 'أداء اليوم مباشر (+0.45%)' : isDe ? 'Heutige Performance (+0,45%)' : isTr ? 'Bugünkü Performans (+%0,45)' : 'Today Live Performance (+0.45%)';
+const chartRate = isAr ? 'السعر الحالي: 73.45 € لكل جرام نقي' : isDe ? 'Aktueller Kurs: 73,45 € pro Gramm' : isTr ? 'Güncel Fiyat: 73,45 € / gram' : 'Current Rate: 73.45 € per pure gram';
+
+// Calculator labels
+const calcTitle = isAr ? 'حاسبة الذهب الفورية' : isDe ? 'Live-Goldrechner' : isTr ? 'Anlık Altın Hesaplayıcı' : 'Live Gold Calculator';
+const calcDesc = isAr ? 'أدخل وزن القطعة الذهبية واختر العيار لمعرفة قيمتها بدقة فورية' : isDe ? 'Gewicht eingeben und Legierung wählen, um den sofortigen Wert zu berechnen.' : isTr ? 'Ağırlık girin ve ayar seçin – anlık değerlendirme.' : 'Enter weight and select karat to calculate instantaneous valuation.';
+const calcWeightLabel = isAr ? 'الوزن (بالجرام):' : isDe ? 'Gewicht (Gramm):' : isTr ? 'Ağırlık (Gram):' : 'Weight (Grams):';
+const calcKaratLabel = isAr ? 'اختيار العيار:' : isDe ? 'Legierung wählen:' : isTr ? 'Ayar Seçin:' : 'Select Karat:';
+const calcCurrLabel = isAr ? 'العملة المفضلة:' : isDe ? 'Währung:' : isTr ? 'Para Birimi:' : 'Currency:';
+const calcPerGram = isAr ? 'سعر الجرام الواحد:' : isDe ? 'Preis pro Gramm:' : isTr ? 'Gram Fiyatı:' : 'Price per Gram:';
+const calcPurityLabel = isAr ? 'نسبة نقاوة الذهب:' : isDe ? 'Reinheitsgrad:' : isTr ? 'Saflık Yüzdesi:' : 'Purity percentage:';
+const calcTotal = isAr ? 'القيمة الإجمالية التقديرية' : isDe ? 'Geschätzter Gesamtwert' : isTr ? 'Tahmini Toplam Değer' : 'Estimated Total Valuation';
+
+// Karat dropdown options
+const opts = [
+  { v: '24', l: isAr ? '24 قيراط (999 سبيكة)' : isDe ? '24 Karat (999 Bullion)' : isTr ? '24 Ayar (999 Külçe)' : '24 Karat (999 Bullion)' },
+  { v: '22', l: isAr ? '22 قيراط (916)' : isDe ? '22 Karat (916)' : isTr ? '22 Ayar (916)' : '22 Karat (916)' },
+  { v: '21', l: isAr ? '21 قيراط (875 عربي)' : isDe ? '21 Karat (875)' : isTr ? '21 Ayar (875)' : '21 Karat (875)' },
+  { v: '18', l: isAr ? '18 قيراط (750 أوروبي)' : isDe ? '18 Karat (750)' : isTr ? '18 Ayar (750)' : '18 Karat (750)' },
+  { v: '14', l: isAr ? '14 قيراط (585)' : isDe ? '14 Karat (585)' : isTr ? '14 Ayar (585)' : '14 Karat (585)' },
+  { v: '8', l: isAr ? '8 قيراط (333)' : isDe ? '8 Karat (333)' : isTr ? '8 Ayar (333)' : '8 Karat (333)' },
+];
+
+// Currency dropdown options
+const currOpts = [
+  { v: 'EUR', l: isAr ? 'اليورو (EUR €)' : 'EUR (€)' },
+  { v: 'USD', l: isAr ? 'الدولار (USD $)' : 'USD ($)' },
+  { v: 'TRY', l: isAr ? 'الليرة التركية (TRY)' : 'TRY (₺)' },
+  { v: 'CHF', l: isAr ? 'الفرنك السويسري (CHF)' : 'CHF (Fr)' },
+];
+
+// Alloy table labels
+const alloyTitle = isAr ? 'أسعار الجرام حسب العيار (باليورو €)' : isDe ? 'Grammpreise nach Karat (EUR €)' : isTr ? 'Ayara Göre Gram Fiyatları (EUR €)' : 'Gram Prices by Karat (EUR €)';
+const alloyColKarat = isAr ? 'العيار (الرمز)' : isDe ? 'Karat (Feinheit)' : isTr ? 'Ayar (Saflık)' : 'Karat (Purity)';
+const alloyColSpot = isAr ? 'سعر الجرام النقي' : isDe ? 'Spot-Grammpreis' : isTr ? 'Spot Gram Fiyatı' : 'Spot Gram';
+const alloyColScrap = isAr ? 'سعر الصهر (البيع)' : isDe ? 'Schmelzwert' : isTr ? 'Eritme Değeri' : 'Scrap Value';
+const alloyLiveTag = isAr ? 'تحديث فوري' : isDe ? 'Live-Update' : isTr ? 'Canlı Güncelleme' : 'Live Update';
+
+const currTitle = isAr ? 'أسعار الذهب بالعملات العالمية' : isDe ? 'Goldpreise in Weltwährungen' : isTr ? 'Dünya Para Birimlerinde Altın Fiyatları' : 'Gold across Global Currencies';
+const currCol1 = isAr ? 'العملة' : isDe ? 'Währung' : isTr ? 'Para Birimi' : 'Currency';
+const currCol2 = isAr ? 'جرام 24 قيراط' : isDe ? '24k Gramm' : isTr ? '24 Ayar Gram' : '24k Gram';
+const currCol3 = isAr ? 'سعر الأونصة' : isDe ? 'Unze (31,1g)' : isTr ? 'Ons (31,1g)' : 'Ounce (31.1g)';
+const currExRate = isAr ? 'سعر الصرف المباشر' : isDe ? 'Live-Wechselkurs' : isTr ? 'Canlı Döviz Kuru' : 'Live Exchange Rate';
+
+// Alloy row labels
+const r24 = isAr ? '24 قيراط (999er)' : '24 Karat (999er)';
+const r22 = isAr ? '22 قيراط (916er)' : '22 Karat (916er)';
+const r21 = isAr ? '21 قيراط (875er)' : '21 Karat (875er)';
+const r18 = isAr ? '18 قيراط (750er)' : '18 Karat (750er)';
+const r14 = isAr ? '14 قيراط (585er)' : '14 Karat (585er)';
+const r8 = isAr ? '8 قيراط (333er)' : '8 Karat (333er)';
+
+// Currency row labels
+const eurLabel = isAr ? 'اليورو (EUR €)' : 'EUR (€)';
+const usdLabel = isAr ? 'الدولار الأمريكي ($)' : 'USD ($)';
+const tryLabel = isAr ? 'الليرة التركية (TL)' : 'TRY (₺)';
+const chfLabel = isAr ? 'الفرنك السويسري (CHF)' : 'CHF (Fr)';
+
+// Chart accessibility summary
+const chartAriaLabel = isAr ? 'رسم بياني يوضح ارتفاع سعر الذهب عيار 24 تدريجياً على مدار اليوم' : isDe ? 'Diagramm zeigt den schrittweisen Anstieg des 24-karätigen Goldpreises im Tagesverlauf' : isTr ? '24 ayar altın fiyatının gün içinde kademeli yükselişini gösteren grafik' : 'Chart showing 24k gold price gradually rising over the course of the day';
+
+// Time period button labels
+const t1d = isAr ? 'اليوم' : isDe ? 'Heute' : isTr ? 'Bugün' : 'Today';
+const t1w = isAr ? 'أسبوع' : isDe ? 'Woche' : isTr ? 'Hafta' : 'Week';
+const t1m = isAr ? 'شهر' : isDe ? 'Monat' : isTr ? 'Ay' : 'Month';
+const t1y = isAr ? 'سنة' : isDe ? 'Jahr' : isTr ? 'Yıl' : 'Year';
+const t5y = isAr ? '5 سنوات' : isDe ? '5 Jahre' : isTr ? '5 Yıl' : '5 Years';
 ---
 
 <div>
-  <!-- Top Real-time Ticker -->
-  <div class="bg-[#0b111e] border-b border-[#d4af37]/30 py-3 text-sm font-semibold shadow-md">
+  <!-- Top Ticker -->
+  <div class="bg-slate-900 py-3 text-sm font-semibold">
     <div class="container flex flex-wrap justify-between items-center gap-4">
       <div class="flex flex-wrap gap-8 items-center">
-        <div class="flex items-center gap-2 bg-[#162036] px-3 py-1 rounded-full border border-white/10">
-          <span class="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></span>
-          <span class="text-slate-300">{isAr ? 'أونصة الذهب (EUR):' : 'Gold Ounce (EUR):'}</span>
-          <span class="font-extrabold text-white text-base" id="ticker-gold">2,284.50 €</span>
-          <span class="text-[#10b981] font-bold text-xs">▲ +0.45%</span>
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true"></span>
+          <span class="text-slate-400">{tickerGoldLabel}</span>
+          <span class="font-bold text-white" id="ticker-gold">2,284.50 €</span>
+          <span class="text-emerald-400 font-bold text-xs">▲ 0.45%</span>
         </div>
         <div class="flex items-center gap-2">
-          <span class="text-slate-400">🥈 {isAr ? 'الفضة:' : 'Silver:'}</span>
+          <span class="text-slate-400">{tickerSilverLabel}</span>
           <span class="font-bold text-white" id="ticker-silver">31.40 €</span>
-          <span class="text-[#10b981] font-bold text-xs">▲ +1.12%</span>
+          <span class="text-emerald-400 font-bold text-xs">▲ 1.12%</span>
         </div>
         <div class="flex items-center gap-2">
-          <span class="text-slate-400">💱 EUR/USD:</span>
+          <span class="text-slate-400">EUR/USD:</span>
           <span class="font-bold text-white">1.0824</span>
         </div>
       </div>
-      <div class="text-[#fbe8a6] text-xs font-medium flex items-center gap-1.5">
-        <span>⚡</span> {isAr ? 'تحديث مباشر ومستمر لبورصة فرانكفورت (Frankfurt Börse)' : 'Real-time Frankfurt Exchange Live Feed'}
-      </div>
+      <div class="text-slate-400 text-xs font-medium">{tickerExchange}</div>
     </div>
   </div>
 
-  <!-- Hero Banner & Primary Price Cards -->
+  <!-- Hero Section -->
   <section class="py-16 md:py-24 relative overflow-hidden" id="live-prices">
-    <!-- Background Glow -->
-    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gradient-to-tr from-[#d4af37]/15 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute top-0 start-1/2 -translate-x-1/2 w-full max-w-3xl h-64 bg-amber-100/50 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
 
     <div class="container relative z-10">
-      <!-- Header Title -->
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <div class="inline-flex items-center gap-2 bg-[#162036] text-[#d4af37] px-4 py-1.5 rounded-full text-sm font-bold border border-[#d4af37]/30 mb-6 shadow-lg">
-          <span>👑</span> {isAr ? 'الأسعار الرسمية اليوم في السوق الألماني' : 'Official Today Prices in German Market'}
-        </div>
-        <h1 class="text-4xl md:text-6xl font-black text-white tracking-tight leading-tight mb-6">
-          {isAr ? 'سعر الذهب في ألمانيا اليوم' : 'Live Gold Price in Germany Today'}
-        </h1>
-        <p class="text-slate-300 text-lg md:text-xl leading-relaxed">
-          {isAr
-            ? 'تابع أسعار جرام الذهب باليورو لحظة بلحظة مع إعفاء ضريبي كامل 100% (MwSt-frei) لسبائك الاستثمار.'
-            : 'Track real-time gold gram prices in EUR with 100% VAT exemption (MwSt-frei) on investment bullion.'}
-        </p>
+        <div class="inline-flex items-center gap-2 bg-amber-50 text-amber-800 px-4 py-1.5 rounded-full text-sm font-bold border border-amber-200 mb-7">{heroBadge}</div>
+        <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight mb-6">{heroTitle}</h1>
+        <p class="text-slate-600 text-lg leading-loose max-w-2xl mx-auto">{heroDesc}</p>
       </div>
 
-      <!-- 3 Prominent Main Cards (Super Easy to Read) -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-12">
-        <!-- 24k Bullion Card -->
-        <div class="bg-gradient-to-b from-[#162238] to-[#0f172a] border-2 border-[#d4af37] p-8 rounded-3xl shadow-[0_10px_30px_rgba(212,175,55,0.15)] flex flex-col justify-between relative transform hover:-translate-y-1 transition-all" data-karat="24">
-          <div class="absolute -top-3 right-6 bg-[var(--gold-gradient)] text-[#0f172a] px-3 py-0.5 rounded-full text-xs font-black uppercase tracking-wider">
-            {isAr ? 'الأكثر طلباً للاستثمار' : 'Best Investment'}
+      <!-- 3 Price Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <!-- 24k -->
+        <div class="card bg-white border-2 border-amber-500 p-8 relative hover:-translate-y-1" data-karat="24">
+          <div class="absolute -top-3 end-6 bg-amber-600 text-white px-3 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider">{k24Tag}</div>
+          <div class="flex justify-between items-center mb-4">
+            <span class="text-lg font-bold text-slate-900">{k24Label}</span>
+            <span class="text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded-lg text-sm">▲ 0.45%</span>
           </div>
-          <div>
-            <div class="flex justify-between items-center mb-4">
-              <span class="text-xl font-bold text-white">جرام 24 قيراط (999)</span>
-              <span class="text-[#10b981] font-bold bg-[#10b981]/10 px-2.5 py-1 rounded-lg text-sm">▲ +0.45%</span>
-            </div>
-            <div class="text-4xl md:text-5xl font-black gold-text my-2 price-main" data-val="73.45">73.45 €</div>
-            <p class="text-slate-400 text-sm mt-3 leading-relaxed">
-              {isAr ? 'سعر الجرام النقي للسبائك والجنيهات الذهبية معفى تماماً من الضرائب في ألمانيا.' : 'Pure gold gram price for bars and bullion coins. 100% tax-free.'}
-            </p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-white/10 flex justify-between text-xs text-slate-400">
-            <span>{isAr ? 'الأونصة (31.1 جم):' : 'Ounce (31.1g):'}</span>
-            <span class="font-bold text-white text-sm" id="card-ounce-24">2,284.50 €</span>
+          <div class="text-4xl font-extrabold accent-text my-3 price-main" data-val="73.45">73.45 €</div>
+          <p class="text-slate-500 text-sm mt-3 leading-relaxed">{k24Desc}</p>
+          <div class="mt-5 pt-4 border-t border-slate-100 flex justify-between text-xs text-slate-500">
+            <span>{ounceLabel}</span>
+            <span class="font-bold text-slate-900 text-sm" id="card-ounce-24">2,284.50 €</span>
           </div>
         </div>
 
-        <!-- 21k Middle Eastern Card -->
-        <div class="bg-[#131c2e] border border-white/15 p-8 rounded-3xl shadow-xl flex flex-col justify-between hover:border-[#d4af37]/60 transform hover:-translate-y-1 transition-all" data-karat="21">
-          <div>
-            <div class="flex justify-between items-center mb-4">
-              <span class="text-xl font-bold text-white">جرام 21 قيراط (875)</span>
-              <span class="text-[#10b981] font-bold bg-[#10b981]/10 px-2.5 py-1 rounded-lg text-sm">▲ +0.38%</span>
-            </div>
-            <div class="text-4xl md:text-5xl font-black text-white my-2 price-main" data-val="64.27">64.27 €</div>
-            <p class="text-slate-400 text-sm mt-3 leading-relaxed">
-              {isAr ? 'العيار المفضل والحصري للحلي والمجوهرات الشرقية في محلات الصاغة.' : 'The standard and most preferred karat for Middle Eastern jewelry.'}
-            </p>
+        <!-- 21k -->
+        <div class="card bg-white p-8 hover:-translate-y-1" data-karat="21">
+          <div class="flex justify-between items-center mb-4">
+            <span class="text-lg font-bold text-slate-900">{k21Label}</span>
+            <span class="text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded-lg text-sm">▲ 0.38%</span>
           </div>
-          <div class="mt-6 pt-4 border-t border-white/10 flex justify-between text-xs text-slate-400">
-            <span>{isAr ? 'نسبة الذهب النقي:' : 'Purity Ratio:'}</span>
-            <span class="font-bold text-[#fbe8a6] text-sm">87.5%</span>
+          <div class="text-4xl font-extrabold text-slate-900 my-3 price-main" data-val="64.27">64.27 €</div>
+          <p class="text-slate-500 text-sm mt-3 leading-relaxed">{k21Desc}</p>
+          <div class="mt-5 pt-4 border-t border-slate-100 flex justify-between text-xs text-slate-500">
+            <span>{purityLabel}</span>
+            <span class="font-bold text-amber-700 text-sm">87.5%</span>
           </div>
         </div>
 
-        <!-- 18k European Card -->
-        <div class="bg-[#131c2e] border border-white/15 p-8 rounded-3xl shadow-xl flex flex-col justify-between hover:border-[#d4af37]/60 transform hover:-translate-y-1 transition-all" data-karat="18">
-          <div>
-            <div class="flex justify-between items-center mb-4">
-              <span class="text-xl font-bold text-white">جرام 18 قيراط (750)</span>
-              <span class="text-[#10b981] font-bold bg-[#10b981]/10 px-2.5 py-1 rounded-lg text-sm">▲ +0.31%</span>
-            </div>
-            <div class="text-4xl md:text-5xl font-black text-white my-2 price-main" data-val="55.09">55.09 €</div>
-            <p class="text-slate-400 text-sm mt-3 leading-relaxed">
-              {isAr ? 'العيار القياسي الأوروبي المعتمد للمجوهرات الفاخرة المطعمة بالألماس.' : 'Standard European jewelry alloy used in luxury diamond settings.'}
-            </p>
+        <!-- 18k -->
+        <div class="card bg-white p-8 hover:-translate-y-1" data-karat="18">
+          <div class="flex justify-between items-center mb-4">
+            <span class="text-lg font-bold text-slate-900">{k18Label}</span>
+            <span class="text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded-lg text-sm">▲ 0.31%</span>
           </div>
-          <div class="mt-6 pt-4 border-t border-white/10 flex justify-between text-xs text-slate-400">
-            <span>{isAr ? 'نسبة الذهب النقي:' : 'Purity Ratio:'}</span>
-            <span class="font-bold text-[#fbe8a6] text-sm">75.0%</span>
+          <div class="text-4xl font-extrabold text-slate-900 my-3 price-main" data-val="55.09">55.09 €</div>
+          <p class="text-slate-500 text-sm mt-3 leading-relaxed">{k18Desc}</p>
+          <div class="mt-5 pt-4 border-t border-slate-100 flex justify-between text-xs text-slate-500">
+            <span>{purityLabel}</span>
+            <span class="font-bold text-amber-700 text-sm">75.0%</span>
           </div>
         </div>
       </div>
 
-      <!-- Quick Jump Buttons -->
-      <div class="flex flex-wrap justify-center gap-4">
-        <a href="#calculator" class="btn-primary text-base px-8 py-4">
-          <span>🧮</span> {isAr ? 'احسب سعر مجوهراتك أو سبائكك الآن' : 'Calculate Your Gold Value Now'}
-        </a>
-        <a href="#alloys" class="btn-secondary text-base px-8 py-4">
-          <span>⚡</span> {isAr ? 'جدول جميع الأعيرة وسعر الصهر' : 'View All Alloys & Scrap Melt'}
-        </a>
+      <!-- CTA Buttons -->
+      <div class="flex flex-wrap justify-center gap-5">
+        <a href="#calculator" class="btn-primary text-base px-7 py-3.5">{ctaCalc}</a>
+        <a href="#alloys" class="btn-secondary text-base px-7 py-3.5">{ctaAlloys}</a>
       </div>
     </div>
   </section>
 
-  <!-- Interactive Chart Section (Spacious & Clean) -->
-  <section class="py-20 bg-[#0c1220] border-y border-white/10" id="chart">
+  <!-- Chart Section -->
+  <section class="py-16 md:py-24 bg-slate-50 border-y border-slate-200" id="chart">
     <div class="container max-w-5xl">
       <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">📈 {isAr ? 'الرسم البياني لحركة أسعار الذهب' : 'Interactive Gold Price Chart'}</h2>
-        <p class="text-slate-400 text-lg max-w-2xl mx-auto">{isAr ? 'تتبع التغيرات الزمنية لسعر الجرام عيار 24 باليورو لمساعدتك في اتخاذ قرار الشراء أو البيع في الوقت المثالي.' : 'Track live and historical movements of 24k gold per gram in EUR.'}</p>
+        <h2 class="text-3xl font-extrabold text-slate-900 mb-4">{chartTitle}</h2>
+        <p class="text-slate-500 text-lg max-w-2xl mx-auto">{chartDesc}</p>
       </div>
 
-      <div class="bg-[#131b2e] border border-white/15 rounded-3xl p-6 md:p-10 shadow-2xl">
-        <!-- Chart Controls -->
-        <div class="flex flex-col md:flex-row justify-between items-center gap-6 mb-8 pb-6 border-b border-white/10">
-          <div>
-            <h3 class="text-2xl font-bold text-white flex items-center gap-2" id="chart-period-title">
-              <span>🟢</span> {isAr ? 'أداء اليوم مباشر (+0.45%)' : 'Today Live Performance (+0.45%)'}
-            </h3>
-            <span class="text-sm text-slate-400">{isAr ? 'السعر الحالي: 73.45 € لكل جرام نقي' : 'Current Rate: 73.45 € per pure gram'}</span>
+      <div class="card bg-white p-6 md:p-9">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 pb-6 border-b border-slate-100">
+          <div class="flex flex-col gap-1">
+            <h3 class="text-xl font-bold text-slate-900" id="chart-period-title">{chartPeriodToday}</h3>
+            <span class="text-sm text-slate-500">{chartRate}</span>
           </div>
-          <div class="flex flex-wrap gap-2 bg-[#080d17] p-2 rounded-2xl border border-white/5">
-            <button class="time-btn active bg-[var(--gold-gradient)] text-[#0f172a] font-extrabold px-5 py-2.5 rounded-xl text-sm shadow" data-period="1d">اليوم (1D)</button>
-            <button class="time-btn text-slate-300 font-bold px-5 py-2.5 rounded-xl text-sm hover:bg-white/5 transition-all" data-period="1w">أسبوع (1W)</button>
-            <button class="time-btn text-slate-300 font-bold px-5 py-2.5 rounded-xl text-sm hover:bg-white/5 transition-all" data-period="1m">شهر (1M)</button>
-            <button class="time-btn text-slate-300 font-bold px-5 py-2.5 rounded-xl text-sm hover:bg-white/5 transition-all" data-period="1y">سنة (1Y)</button>
-            <button class="time-btn text-slate-300 font-bold px-5 py-2.5 rounded-xl text-sm hover:bg-white/5 transition-all" data-period="5y">5 سنوات (5Y)</button>
+          <div class="flex flex-wrap gap-1.5 bg-slate-100 p-1.5 rounded-xl" dir="ltr">
+            <button class="time-btn active bg-amber-600 text-white font-bold px-4 py-2 rounded-lg text-sm" data-period="1d">{t1d}</button>
+            <button class="time-btn text-slate-500 font-bold px-4 py-2 rounded-lg text-sm hover:bg-white" data-period="1w">{t1w}</button>
+            <button class="time-btn text-slate-500 font-bold px-4 py-2 rounded-lg text-sm hover:bg-white" data-period="1m">{t1m}</button>
+            <button class="time-btn text-slate-500 font-bold px-4 py-2 rounded-lg text-sm hover:bg-white" data-period="1y">{t1y}</button>
+            <button class="time-btn text-slate-500 font-bold px-4 py-2 rounded-lg text-sm hover:bg-white" data-period="5y">{t5y}</button>
           </div>
         </div>
 
-        <!-- Visual Bars Area -->
-        <div class="h-80 relative flex items-end pt-8 pb-8 border-b-2 border-[#d4af37]/40">
-          <!-- Background Grid Lines -->
-          <div class="absolute inset-0 bottom-8 flex flex-col justify-between pointer-events-none pr-12">
-            <div class="border-b border-dashed border-white/10 w-full text-left"><span class="text-xs text-slate-500 font-mono inline-block -mt-5">80.00 €</span></div>
-            <div class="border-b border-dashed border-white/10 w-full text-left"><span class="text-xs text-slate-500 font-mono inline-block -mt-5">75.00 €</span></div>
-            <div class="border-b border-dashed border-white/10 w-full text-left"><span class="text-xs text-slate-500 font-mono inline-block -mt-5">70.00 €</span></div>
-            <div class="border-b border-dashed border-white/10 w-full text-left"><span class="text-xs text-slate-500 font-mono inline-block -mt-5">65.00 €</span></div>
+        <!-- Chart bars area — force LTR so 8:00 is on left, 19:00 on right -->
+        <div class="h-72 relative flex items-end pt-6 pb-6 border-b-2 border-slate-200" dir="ltr" role="img" aria-label={chartAriaLabel}>
+          <div class="absolute inset-0 bottom-6 flex flex-col justify-between pointer-events-none pl-12" aria-hidden="true">
+            <div class="border-b border-dashed border-slate-200 w-full text-left"><span class="text-xs text-slate-400 font-mono -mt-4 inline-block">80 €</span></div>
+            <div class="border-b border-dashed border-slate-200 w-full text-left"><span class="text-xs text-slate-400 font-mono -mt-4 inline-block">75 €</span></div>
+            <div class="border-b border-dashed border-slate-200 w-full text-left"><span class="text-xs text-slate-400 font-mono -mt-4 inline-block">70 €</span></div>
+            <div class="border-b border-dashed border-slate-200 w-full text-left"><span class="text-xs text-slate-400 font-mono -mt-4 inline-block">65 €</span></div>
           </div>
-
-          <!-- Bars -->
-          <div class="flex justify-between items-end w-full h-full z-10 gap-2 md:gap-4 px-2 md:px-8">
+          <div class="flex justify-between items-end w-full h-full z-10 gap-2.5 md:gap-4 px-2 md:px-6" aria-hidden="true">
             {[50, 53, 52, 58, 62, 60, 68, 74, 72, 78, 85, 90].map((h, i) => (
-              <div class="flex flex-col items-center gap-3 flex-1 h-full justify-end group cursor-pointer">
-                <div class="w-full max-w-[44px] rounded-t-xl bg-gradient-to-t from-[#d4af37]/40 via-[#d4af37] to-[#fcf6ba] transition-all duration-500 relative group-hover:brightness-125 group-hover:shadow-[0_0_20px_rgba(212,175,55,0.8)] chart-bar" style={`height: ${h}%;`}>
-                  <span class="absolute -top-10 left-1/2 -translate-x-1/2 bg-[#0f172a] border border-[#d4af37] text-[#fbe8a6] px-2.5 py-1 rounded-lg text-xs font-black opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-2xl z-20 pointer-events-none">
+              <div class="flex flex-col items-center gap-2 flex-1 h-full justify-end group cursor-pointer">
+                <div class="w-full max-w-[40px] rounded-t-lg bg-amber-500 transition-all duration-300 relative group-hover:bg-amber-600 chart-bar" style={`height: ${h}%;`}>
+                  <span class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white px-2 py-0.5 rounded text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg z-20 pointer-events-none">
                     {70 + Math.floor(h / 15)}.{Math.floor((h % 15) * 6)} €
                   </span>
                 </div>
-                <span class="text-xs text-slate-400 font-bold font-mono">{i + 8}:00</span>
+                <span class="text-[11px] text-slate-400 font-mono">{i + 8}:00</span>
               </div>
             ))}
           </div>
@@ -181,127 +245,108 @@ const isAr = locale === 'ar';
     </div>
   </section>
 
-  <!-- Interactive Calculator Section (Super Clear & Intuitive) -->
-  <section class="py-20" id="calculator">
+  <!-- Calculator Section -->
+  <section class="py-16 md:py-24" id="calculator">
     <div class="container max-w-4xl">
       <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">🧮 {isAr ? 'حاسبة الذهب الفورية' : 'Live Gold Calculator'}</h2>
-        <p class="text-slate-300 text-lg">{isAr ? 'أدخل وزن القطعة الذهبية أو السبيكة، واختر العيار لمعرفة قيمتها التقديرية بدقة فورية' : 'Enter weight and select karat to calculate instantaneous valuation.'}</p>
+        <h2 class="text-3xl font-extrabold text-slate-900 mb-4">{calcTitle}</h2>
+        <p class="text-slate-600 text-lg">{calcDesc}</p>
       </div>
 
-      <div class="bg-[#131b2e] border-2 border-[#d4af37]/40 rounded-3xl p-8 md:p-12 shadow-2xl">
+      <div class="card bg-white p-6 md:p-10">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-          <div class="flex flex-col gap-3">
-            <label for="calc-weight" class="text-base font-bold text-white flex items-center gap-2">
-              <span>⚖️</span> {isAr ? 'الوزن (بالجرام):' : 'Weight (Grams):'}
-            </label>
-            <input type="number" id="calc-weight" class="bg-[#080d17] border-2 border-white/15 focus:border-[#d4af37] text-white p-4 rounded-2xl font-black text-xl text-center transition-all focus:outline-none" value="10" step="0.5">
+          <div class="flex flex-col gap-2.5">
+            <label for="calc-weight" class="text-sm font-bold text-slate-700">{calcWeightLabel}</label>
+            <input type="number" id="calc-weight" class="bg-slate-50 border border-slate-200 focus:border-amber-500 text-slate-900 p-4 rounded-xl font-bold text-lg text-center transition-all focus:outline-none" value="10" step="0.5">
           </div>
-
-          <div class="flex flex-col gap-3">
-            <label for="calc-karat" class="text-base font-bold text-white flex items-center gap-2">
-              <span>👑</span> {isAr ? 'اختيار العيار:' : 'Select Karat:'}
-            </label>
-            <select id="calc-karat" class="bg-[#080d17] border-2 border-white/15 focus:border-[#d4af37] text-white p-4 rounded-2xl font-black text-xl text-center transition-all focus:outline-none cursor-pointer">
-              <option value="24">24 قيراط (999 سبيكة)</option>
-              <option value="22">22 قيراط (916)</option>
-              <option value="21" selected>21 قيراط (875 عربي)</option>
-              <option value="18">18 قيراط (750 أوروبي)</option>
-              <option value="14">14 قيراط (585)</option>
-              <option value="8">8 قيراط (333)</option>
+          <div class="flex flex-col gap-2.5">
+            <label for="calc-karat" class="text-sm font-bold text-slate-700">{calcKaratLabel}</label>
+            <select id="calc-karat" class="bg-slate-50 border border-slate-200 focus:border-amber-500 text-slate-900 p-4 rounded-xl font-bold text-lg text-center transition-all focus:outline-none cursor-pointer">
+              {opts.map(o => <option value={o.v} selected={o.v === '21'}>{o.l}</option>)}
             </select>
           </div>
-
-          <div class="flex flex-col gap-3">
-            <label for="calc-currency" class="text-base font-bold text-white flex items-center gap-2">
-              <span>💱</span> {isAr ? 'العملة المفضلة:' : 'Currency:'}
-            </label>
-            <select id="calc-currency" class="bg-[#080d17] border-2 border-white/15 focus:border-[#d4af37] text-white p-4 rounded-2xl font-black text-xl text-center transition-all focus:outline-none cursor-pointer">
-              <option value="EUR" selected>🇪🇺 اليورو (EUR €)</option>
-              <option value="USD">🇺🇸 الدولار (USD $)</option>
-              <option value="TRY">🇹🇷 الليرة التركية (TRY TL)</option>
-              <option value="CHF">🇨🇭 الفرنك السويسري (CHF)</option>
+          <div class="flex flex-col gap-2.5">
+            <label for="calc-currency" class="text-sm font-bold text-slate-700">{calcCurrLabel}</label>
+            <select id="calc-currency" class="bg-slate-50 border border-slate-200 focus:border-amber-500 text-slate-900 p-4 rounded-xl font-bold text-lg text-center transition-all focus:outline-none cursor-pointer">
+              {currOpts.map(o => <option value={o.v} selected={o.v === 'EUR'}>{o.l}</option>)}
             </select>
           </div>
         </div>
 
-        <!-- Result Highlights Box -->
-        <div class="bg-gradient-to-r from-[#1c2944] via-[#162036] to-[#1c2944] border-2 border-[#d4af37] rounded-3xl p-8 flex flex-col md:flex-row justify-between items-center gap-8 shadow-2xl">
-          <div class="text-center md:text-right">
-            <span class="text-sm font-bold text-slate-300 block mb-1">{isAr ? 'سعر الجرام الواحد المعياري:' : 'Price per Gram:'}</span>
-            <span class="text-2xl font-black text-white" id="calc-gram-val">64.27 €</span>
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-7 flex flex-col md:flex-row justify-between items-center gap-7">
+          <div class="text-center">
+            <span class="text-xs font-bold text-slate-500 block mb-2">{calcPerGram}</span>
+            <span class="text-2xl font-extrabold text-slate-900" id="calc-gram-val">64.27 €</span>
           </div>
-
-          <div class="text-center md:text-right">
-            <span class="text-sm font-bold text-slate-300 block mb-1">{isAr ? 'نسبة نقاوة الذهب في العيار:' : 'Purity percentage:'}</span>
-            <span class="text-2xl font-black text-[#fbe8a6]" id="calc-purity-val">87.5% (21k)</span>
+          <div class="text-center">
+            <span class="text-xs font-bold text-slate-500 block mb-2">{calcPurityLabel}</span>
+            <span class="text-2xl font-extrabold text-amber-700" id="calc-purity-val">87.5% (21k)</span>
           </div>
-
-          <div class="bg-[#080d17] px-8 py-5 rounded-2xl border border-[#d4af37]/40 text-center w-full md:w-auto min-w-[280px]">
-            <span class="text-xs font-extrabold text-[#d4af37] uppercase tracking-widest block mb-1">{isAr ? 'القيمة الإجمالية التقديرية' : 'Estimated Total Valuation'}</span>
-            <span class="text-4xl md:text-5xl font-black gold-text block" id="calc-total-val">642.70 €</span>
+          <div class="bg-white px-7 py-5 rounded-xl border border-amber-300 text-center min-w-[240px]">
+            <span class="text-[10px] font-extrabold text-amber-700 uppercase tracking-widest block mb-2">{calcTotal}</span>
+            <span class="text-4xl font-extrabold accent-text block" id="calc-total-val">642.70 €</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Comprehensive Tables (Super Easy to Read) -->
-  <section class="py-20 bg-[#0c1220]" id="alloys">
+  <!-- Alloy & Currency Tables -->
+  <section class="py-16 md:py-24 bg-slate-50" id="alloys">
     <div class="container max-w-6xl">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">📊 {isAr ? 'جدول جميع أعيرة الذهب وسعر الصهر في ألمانيا' : 'Complete Gold Alloys & Scrap Valuation Table'}</h2>
-        <p class="text-slate-300 text-lg max-w-3xl mx-auto">{isAr ? 'قارن بين سعر الشراء للجرام النقي وسعر الصهر (Scrap Value / Altgold) الذي يقدمه التجار عند شراء الذهب القديم منك.' : 'Compare spot bullion gram rates against dealer scrap melting offers across all standard German carats.'}</p>
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-extrabold text-slate-900 mb-4">{isAr ? 'جدول جميع أعيرة الذهب وسعر الصهر في ألمانيا' : isDe ? 'Alle Goldlegierungen & Schmelzwerte in Deutschland' : isTr ? 'Almanya\'da Tüm Altın Ayarları ve Eritme Değerleri' : 'Complete Gold Alloys & Scrap Valuation Table'}</h2>
+        <p class="text-slate-600 text-lg max-w-3xl mx-auto">{isAr ? 'قارن بين سعر الشراء للجرام النقي وسعر الصهر الذي يقدمه التجار عند شراء الذهب القديم منك.' : isDe ? 'Vergleichen Sie Spot-Grammpreise mit Schmelzwerten der Händler beim Altgoldankauf.' : isTr ? 'Spot gram fiyatlarını, bayilerin eski altın alımında sunduğu eritme değerleriyle karşılaştırın.' : 'Compare spot bullion gram rates against dealer scrap melting offers across all standard German carats.'}</p>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        <!-- Table 1: Alloys & Scrap -->
-        <div class="bg-[#131b2e] border border-white/15 rounded-3xl overflow-hidden shadow-2xl">
-          <div class="bg-[#1c2944] px-8 py-6 border-b border-white/10 flex items-center justify-between">
-            <h3 class="text-xl font-bold text-[#fbe8a6]">⚡ {isAr ? 'أسعار الجرام حسب العيار (بـ اليورو €)' : 'Gram Prices by Karat (EUR €)'}</h3>
-            <span class="text-xs bg-[#10b981]/20 text-[#10b981] font-bold px-3 py-1 rounded-full">تحديث فوري</span>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Alloys Table -->
+        <div class="card bg-white overflow-hidden">
+          <div class="bg-slate-50 px-7 py-5 border-b border-slate-200 flex items-center justify-between">
+            <h3 class="text-lg font-bold text-slate-900">{alloyTitle}</h3>
+            <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-3 py-1 rounded-full">{alloyLiveTag}</span>
           </div>
           <div class="p-6 overflow-x-auto">
-            <table class="w-full text-right border-collapse">
+            <table class="w-full text-right border-collapse min-w-[420px]">
               <thead>
-                <tr class="border-b-2 border-[#d4af37]/30 text-slate-300 text-base font-bold">
-                  <th class="py-4 px-3">{isAr ? 'العيار (الرمز)' : 'Karat (Purity)'}</th>
-                  <th class="py-4 px-3">{isAr ? 'سعر الجرام النقي' : 'Spot Gram'}</th>
-                  <th class="py-4 px-3">{isAr ? 'سعر الصهر (البيع)' : 'Scrap Value'}</th>
+                <tr class="border-b-2 border-slate-200 text-slate-500 text-sm font-bold">
+                  <th class="py-4 px-3">{alloyColKarat}</th>
+                  <th class="py-4 px-3">{alloyColSpot}</th>
+                  <th class="py-4 px-3">{alloyColScrap}</th>
                 </tr>
               </thead>
-              <tbody class="text-base font-semibold divide-y divide-white/10">
-                <tr class="hover:bg-white/5 transition-colors" data-karat="24"><td class="py-4 px-3 font-bold text-white">24 قيراط (999er)</td><td class="alloy-gram gold-text font-black text-lg">73.45 €</td><td class="alloy-scrap text-slate-300 font-bold">72.35 €</td></tr>
-                <tr class="hover:bg-white/5 transition-colors" data-karat="22"><td class="py-4 px-3 font-bold text-white">22 قيراط (916er)</td><td class="alloy-gram text-white font-bold text-lg">67.33 €</td><td class="alloy-scrap text-slate-300 font-bold">66.30 €</td></tr>
-                <tr class="hover:bg-white/5 bg-white/[0.02] transition-colors" data-karat="21"><td class="py-4 px-3 font-bold text-[#fbe8a6]">21 قيراط (875er) ⭐</td><td class="alloy-gram text-white font-black text-lg">64.27 €</td><td class="alloy-scrap text-slate-300 font-bold">63.30 €</td></tr>
-                <tr class="hover:bg-white/5 transition-colors" data-karat="18"><td class="py-4 px-3 font-bold text-white">18 قيراط (750er)</td><td class="alloy-gram text-white font-bold text-lg">55.09 €</td><td class="alloy-scrap text-slate-300 font-bold">54.25 €</td></tr>
-                <tr class="hover:bg-white/5 transition-colors" data-karat="14"><td class="py-4 px-3 font-bold text-white">14 قيراط (585er)</td><td class="alloy-gram text-white font-bold text-lg">42.85 €</td><td class="alloy-scrap text-slate-300 font-bold">42.20 €</td></tr>
-                <tr class="hover:bg-white/5 transition-colors" data-karat="8"><td class="py-4 px-3 font-bold text-white">8 قيراط (333er)</td><td class="alloy-gram text-white font-bold text-lg">24.48 €</td><td class="alloy-scrap text-slate-300 font-bold">24.10 €</td></tr>
+              <tbody class="text-sm font-semibold divide-y divide-slate-100">
+                <tr class="hover:bg-slate-50" data-karat="24"><td class="py-4 px-3 font-bold text-slate-900">{r24}</td><td class="alloy-gram accent-text font-black">73.45 €</td><td class="alloy-scrap text-slate-500 font-bold">72.35 €</td></tr>
+                <tr class="hover:bg-slate-50" data-karat="22"><td class="py-4 px-3 font-bold text-slate-900">{r22}</td><td class="alloy-gram text-slate-900 font-bold">67.33 €</td><td class="alloy-scrap text-slate-500 font-bold">66.30 €</td></tr>
+                <tr class="hover:bg-slate-50 bg-amber-50/40" data-karat="21"><td class="py-4 px-3 font-bold text-amber-700">{r21}</td><td class="alloy-gram text-slate-900 font-black">64.27 €</td><td class="alloy-scrap text-slate-500 font-bold">63.30 €</td></tr>
+                <tr class="hover:bg-slate-50" data-karat="18"><td class="py-4 px-3 font-bold text-slate-900">{r18}</td><td class="alloy-gram text-slate-900 font-bold">55.09 €</td><td class="alloy-scrap text-slate-500 font-bold">54.25 €</td></tr>
+                <tr class="hover:bg-slate-50" data-karat="14"><td class="py-4 px-3 font-bold text-slate-900">{r14}</td><td class="alloy-gram text-slate-900 font-bold">42.85 €</td><td class="alloy-scrap text-slate-500 font-bold">42.20 €</td></tr>
+                <tr class="hover:bg-slate-50" data-karat="8"><td class="py-4 px-3 font-bold text-slate-900">{r8}</td><td class="alloy-gram text-slate-900 font-bold">24.48 €</td><td class="alloy-scrap text-slate-500 font-bold">24.10 €</td></tr>
               </tbody>
             </table>
           </div>
         </div>
 
-        <!-- Table 2: World Currencies -->
-        <div class="bg-[#131b2e] border border-white/15 rounded-3xl overflow-hidden shadow-2xl" id="currencies">
-          <div class="bg-[#1c2944] px-8 py-6 border-b border-white/10 flex items-center justify-between">
-            <h3 class="text-xl font-bold text-[#fbe8a6]">🌍 {isAr ? 'أسعار الذهب بالعملات العالمية الرئيسية' : 'Gold across Global Currencies'}</h3>
-            <span class="text-xs bg-blue-500/20 text-blue-300 font-bold px-3 py-1 rounded-full">سعر الصرف المباشر</span>
+        <!-- Currency Table -->
+        <div class="card bg-white overflow-hidden" id="currencies">
+          <div class="bg-slate-50 px-7 py-5 border-b border-slate-200 flex items-center justify-between">
+            <h3 class="text-lg font-bold text-slate-900">{currTitle}</h3>
+            <span class="text-xs bg-blue-50 text-blue-700 font-bold px-3 py-1 rounded-full">{currExRate}</span>
           </div>
           <div class="p-6 overflow-x-auto">
-            <table class="w-full text-right border-collapse">
+            <table class="w-full text-right border-collapse min-w-[420px]">
               <thead>
-                <tr class="border-b-2 border-[#d4af37]/30 text-slate-300 text-base font-bold">
-                  <th class="py-4 px-3">{isAr ? 'العملة' : 'Currency'}</th>
-                  <th class="py-4 px-3">{isAr ? 'جرام 24 قيراط' : '24k Gram'}</th>
-                  <th class="py-4 px-3">{isAr ? 'سعر الأونصة' : 'Ounce (31.1g)'}</th>
+                <tr class="border-b-2 border-slate-200 text-slate-500 text-sm font-bold">
+                  <th class="py-4 px-3">{currCol1}</th>
+                  <th class="py-4 px-3">{currCol2}</th>
+                  <th class="py-4 px-3">{currCol3}</th>
                 </tr>
               </thead>
-              <tbody class="text-base font-semibold divide-y divide-white/10">
-                <tr class="hover:bg-white/5 transition-colors" data-curr="EUR"><td class="py-4 px-3 font-bold text-white">🇪🇺 اليورو (EUR €)</td><td class="curr-gram gold-text font-black text-lg">73.45 €</td><td class="curr-ounce text-white font-bold text-lg">2,284.50 €</td></tr>
-                <tr class="hover:bg-white/5 transition-colors" data-curr="USD"><td class="py-4 px-3 font-bold text-white">🇺🇸 الدولار الأمريكي ($)</td><td class="curr-gram text-white font-bold text-lg">79.33 $</td><td class="curr-ounce text-white font-bold text-lg">2,467.26 $</td></tr>
-                <tr class="hover:bg-white/5 bg-white/[0.02] transition-colors" data-curr="TRY"><td class="py-4 px-3 font-bold text-[#fbe8a6]">🇹🇷 الليرة التركية (TL)</td><td class="curr-gram text-white font-bold text-lg">2,600.13 TL</td><td class="curr-ounce text-white font-bold text-lg">80,871.30 TL</td></tr>
-                <tr class="hover:bg-white/5 transition-colors" data-curr="CHF"><td class="py-4 px-3 font-bold text-white">🇨🇭 الفرنك السويسري (CHF)</td><td class="curr-gram text-white font-bold text-lg">69.78 CHF</td><td class="curr-ounce text-white font-bold text-lg">2,170.28 CHF</td></tr>
+              <tbody class="text-sm font-semibold divide-y divide-slate-100">
+                <tr class="hover:bg-slate-50" data-curr="EUR"><td class="py-4 px-3 font-bold text-slate-900">{eurLabel}</td><td class="curr-gram accent-text font-black">73.45 €</td><td class="curr-ounce text-slate-900 font-bold">2,284.50 €</td></tr>
+                <tr class="hover:bg-slate-50" data-curr="USD"><td class="py-4 px-3 font-bold text-slate-900">{usdLabel}</td><td class="curr-gram text-slate-900 font-bold">79.33 $</td><td class="curr-ounce text-slate-900 font-bold">2,467.26 $</td></tr>
+                <tr class="hover:bg-slate-50 bg-amber-50/40" data-curr="TRY"><td class="py-4 px-3 font-bold text-amber-700">{tryLabel}</td><td class="curr-gram text-slate-900 font-bold">2,600.13 TL</td><td class="curr-ounce text-slate-900 font-bold">80,871.30 TL</td></tr>
+                <tr class="hover:bg-slate-50" data-curr="CHF"><td class="py-4 px-3 font-bold text-slate-900">{chfLabel}</td><td class="curr-gram text-slate-900 font-bold">69.78 CHF</td><td class="curr-ounce text-slate-900 font-bold">2,170.28 CHF</td></tr>
               </tbody>
             </table>
           </div>
@@ -315,8 +360,12 @@ const isAr = locale === 'ar';
   const basePricesEUR: Record<number, number> = { 24: 73.45, 22: 67.33, 21: 64.27, 18: 55.09, 14: 42.85, 8: 24.48 };
   const rates: Record<string, number> = { EUR: 1.0, USD: 1.08, CHF: 0.95, TRY: 35.40 };
   let livePrices = { ...basePricesEUR };
+  let tickIntervalId: ReturnType<typeof setInterval> | null = null;
 
   function setupInteractions() {
+    // Clean up any previous interval to prevent stacking
+    if (tickIntervalId) clearInterval(tickIntervalId);
+
     const wInput = document.getElementById('calc-weight') as HTMLInputElement;
     const kSelect = document.getElementById('calc-karat') as HTMLSelectElement;
     const cSelect = document.getElementById('calc-currency') as HTMLSelectElement;
@@ -336,7 +385,7 @@ const isAr = locale === 'ar';
 
       if (totalElem) totalElem.textContent = `${tot.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} ${sym}`;
       if (gramElem) gramElem.textContent = `${pg.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} ${sym}`;
-      if (purityElem) purityElem.textContent = k === 24 ? '99.9% (24k)' : k === 22 ? '91.6% (22k)' : k === 21 ? '87.5% (21k)' : `${k}k`;
+      if (purityElem) purityElem.textContent = k === 24 ? '99.9% (24k)' : k === 22 ? '91.6% (22k)' : k === 21 ? '87.5% (21k)' : k === 18 ? '75.0% (18k)' : k === 14 ? '58.5% (14k)' : '33.3% (8k)';
     };
 
     wInput?.addEventListener('input', calc);
@@ -347,42 +396,39 @@ const isAr = locale === 'ar';
     // Chart tab switching
     const timeBtns = document.querySelectorAll('.time-btn');
     const bars = document.querySelectorAll('.chart-bar');
-    const chartTitle = document.getElementById('chart-period-title');
-    const chartData: Record<string, { title: string, heights: number[] }> = {
-      '1d': { title: '🟢 أداء اليوم مباشر (+0.45%)', heights: [50, 53, 52, 58, 62, 60, 68, 74, 72, 78, 85, 90] },
-      '1w': { title: '🟢 أداء الأسبوع الماضي (+1.40%)', heights: [40, 44, 48, 45, 55, 60, 65, 62, 70, 78, 84, 90] },
-      '1m': { title: '🟢 أداء الشهر الماضي (+3.85%)', heights: [30, 35, 42, 40, 50, 55, 62, 68, 75, 80, 85, 90] },
-      '1y': { title: '🟢 أداء السنة السابقة (+34.20%)', heights: [20, 25, 30, 38, 45, 52, 60, 68, 74, 80, 85, 90] },
-      '5y': { title: '🟢 أداء آخر 5 سنوات (+88.50%)', heights: [15, 20, 28, 35, 44, 50, 58, 66, 72, 80, 85, 90] }
+    const chartData: Record<string, number[]> = {
+      '1d': [50, 53, 52, 58, 62, 60, 68, 74, 72, 78, 85, 90],
+      '1w': [40, 44, 48, 45, 55, 60, 65, 62, 70, 78, 84, 90],
+      '1m': [30, 35, 42, 40, 50, 55, 62, 68, 75, 80, 85, 90],
+      '1y': [20, 25, 30, 38, 45, 52, 60, 68, 74, 80, 85, 90],
+      '5y': [15, 20, 28, 35, 44, 50, 58, 66, 72, 80, 85, 90]
     };
 
     timeBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         timeBtns.forEach(b => {
-          b.classList.remove('active', 'bg-[var(--gold-gradient)]', 'text-[#0f172a]', 'shadow');
-          b.classList.add('text-slate-300');
+          b.classList.remove('active', 'bg-amber-600', 'text-white');
+          b.classList.add('text-slate-500');
         });
-        btn.classList.add('active', 'bg-[var(--gold-gradient)]', 'text-[#0f172a]', 'shadow');
-        btn.classList.remove('text-slate-300');
+        btn.classList.add('active', 'bg-amber-600', 'text-white');
+        btn.classList.remove('text-slate-500');
         const p = btn.getAttribute('data-period') || '1d';
-        if (chartTitle && chartData[p]) chartTitle.innerHTML = `<span>🟢</span> ${chartData[p].title}`;
         bars.forEach((bar, idx) => {
-          if (chartData[p]?.heights[idx] !== undefined) {
-            (bar as HTMLElement).style.height = `${chartData[p].heights[idx]}%`;
+          if (chartData[p]?.[idx] !== undefined) {
+            (bar as HTMLElement).style.height = `${chartData[p][idx]}%`;
           }
         });
       });
     });
 
-    // Live tick simulator
-    setInterval(() => {
-      const delta = (Math.random() * 0.16 - 0.06);
+    // Live price tick — runs every 8 seconds, safe interval with cleanup
+    tickIntervalId = setInterval(() => {
+      const delta = (Math.random() * 0.12 - 0.04);
       for (let k in livePrices) {
-        livePrices[Number(k)] = Math.max(10, parseFloat((livePrices[Number(k)] + delta * (Number(k)/24)).toFixed(2)));
+        livePrices[Number(k)] = Math.max(10, parseFloat((livePrices[Number(k)] + delta * (Number(k) / 24)).toFixed(2)));
       }
       const tg = document.getElementById('ticker-gold');
       if (tg) tg.textContent = `${(livePrices[24] * 31.1035).toFixed(2)} €`;
-      
       const ozCard = document.getElementById('card-ounce-24');
       if (ozCard) ozCard.textContent = `${(livePrices[24] * 31.1035).toFixed(2)} €`;
 
@@ -394,7 +440,7 @@ const isAr = locale === 'ar';
         }
       });
       calc();
-    }, 5000);
+    }, 8000);
   }
 
   setupInteractions();

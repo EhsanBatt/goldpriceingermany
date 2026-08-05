@@ -6,42 +6,47 @@ const { locale = defaultLocale } = Astro.props;
 const t = getTranslations(locale);
 const hw = t.howItWorks || {};
 const isAr = locale === 'ar';
+const isDe = locale === 'de';
+const isTr = locale === 'tr';
+
+const sectionTitle = hw.title || (isAr ? 'كيف يعمل موقع سعر الذهب في ألمانيا' : isDe ? 'So funktioniert Gold Price Germany' : isTr ? 'Gold Price Germany Nasıl Çalışır' : 'How Gold Price Germany Works');
+const sectionDesc = hw.subtitle || (isAr ? 'نربطك مباشرةً ببيانات بورصة فرانكفورت وأسعار الصاغة المعتمدة لحظة بلحظة' : isDe ? 'Wir verbinden Sie direkt mit den Daten der Frankfurter Börse und zertifizierten Händlerpreisen in Echtzeit.' : isTr ? 'Frankfurt Borsası verileri ve sertifikalı bayi fiyatlarıyla sizi gerçek zamanlı olarak buluşturuyoruz.' : 'Connecting you directly to Frankfurt exchange market data and certified bullion prices real-time.');
+
+const s1Title = hw.step1Title || (isAr ? 'تحديث فوري من البورصة' : isDe ? 'Sofortige Börsendaten' : isTr ? 'Anlık Borsa Verileri' : 'Instant Exchange Feed');
+const s1Desc = hw.step1Desc || (isAr ? 'نستقبل أسعار الأونصة العالمية الفورية ونقوم بتحويلها مباشرةً إلى اليورو بأحدث أسعار الصرف.' : isDe ? 'Wir empfangen globale Spot-Unzenpreise und konvertieren sie sofort in EUR mit aktuellen Wechselkursen.' : isTr ? 'Küresel spot ons fiyatlarını alıp, güncel döviz kurlarıyla anında EUR\'ya dönüştürüyoruz.' : 'We fetch live global spot gold ounce prices and convert them directly to EUR using real-time forex rates.');
+
+const s2Title = hw.step2Title || (isAr ? 'حساب الأعيرة بدقة' : isDe ? 'Präzise Legierungsberechnung' : isTr ? 'Hassas Ayar Hesaplaması' : 'Accurate Alloy Calculation');
+const s2Desc = hw.step2Desc || (isAr ? 'نقوم بتطبيق نسب النقاوة الدقيقة لحساب أسعار الجرام للعيارات 24 و22 و21 و18 و14 و8.' : isDe ? 'Wir berechnen exakte Reinheitsgrade für Grammpreise von 24k, 22k, 21k, 18k, 14k und 8k.' : isTr ? '24k, 22k, 21k, 18k, 14k ve 8k ayarlar için kesin saflık oranlarıyla gram fiyatlarını hesaplıyoruz.' : 'We apply exact purity ratios to calculate per-gram prices for 24k, 22k, 21k, 18k, 14k, and 8k.');
+
+const s3Title = hw.step3Title || (isAr ? 'أدوات استثمارية متطورة' : isDe ? 'Fortschrittliche Anlagetools' : isTr ? 'Gelişmiş Yatırım Araçları' : 'Advanced Investor Tools');
+const s3Desc = hw.step3Desc || (isAr ? 'نوفر لك حاسبة فورية ورسوماً بيانية وجداول صهر لمساعدتك في البيع والشراء بثقة.' : isDe ? 'Interaktive Rechner, dynamische Charts und Schmelzwerttabellen für fundierte Kauf- und Verkaufsentscheidungen.' : isTr ? 'Bilinçli alım-satım kararları için interaktif hesaplayıcılar, dinamik grafikler ve eritme değeri tabloları.' : 'We provide interactive calculators, dynamic charts, and scrap melt valuation tables for informed trading.');
 ---
 
-<section class="py-20 bg-[#0b111e] border-t border-white/10">
+<section class="py-16 md:py-24 bg-white border-t border-slate-200">
   <div class="container max-w-6xl">
     <div class="text-center max-w-3xl mx-auto mb-16">
-      <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">💡 {hw.title || (isAr ? 'كيف تستثمر في الذهب بذكاء وبدون ضرائب؟' : 'How to Invest in Gold Wisely & Tax-Free')}</h2>
-      <p class="text-slate-300 text-lg leading-relaxed">{hw.subtitle || (isAr ? 'خطوات عملية ومجربة تضمن لك شراء الذهب الاستثماري في ألمانيا بأفضل سعر وأعلى عائد أمان.' : 'Proven steps to buy investment bullion in Germany at the best spot price with total security.')}</p>
+      <h2 class="text-3xl font-extrabold text-slate-900 mb-4">{sectionTitle}</h2>
+      <p class="text-slate-600 text-lg leading-loose">{sectionDesc}</p>
       <slot name="intro" />
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <!-- Step 1 -->
-      <div class="bg-[#131c2e] border-2 border-white/10 hover:border-[#d4af37] p-8 rounded-3xl transition-all duration-300 shadow-xl flex flex-col justify-between group">
-        <div>
-          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#d4af37] to-[#aa771c] text-[#0f172a] flex items-center justify-center font-black text-2xl mb-6 shadow-lg group-hover:scale-110 transition-transform">1</div>
-          <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-[#fbe8a6] transition-colors">{hw.step1Title || (isAr ? 'اختر الذهب الاستثماري عيار 24' : 'Choose 24k Bullion')}</h3>
-          <p class="text-slate-300 text-base leading-relaxed">{hw.step1Desc || (isAr ? 'تأكد أن سبيكتك أو عملتك الذهبية بنسبة نقاوة 999.9 لتستفيد من الإعفاء الكامل من ضريبة القيمة المضافة (MwSt-frei).' : 'Ensure your bullion bar or coin is 999.9 purity to benefit from 100% VAT exemption in Germany.')}</p>
-        </div>
+      <div class="card p-8 group">
+        <div class="w-12 h-12 rounded-xl bg-amber-600 text-white flex items-center justify-center font-bold text-xl mb-6">1</div>
+        <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-amber-700 transition-colors">{s1Title}</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">{s1Desc}</p>
       </div>
 
-      <!-- Step 2 -->
-      <div class="bg-[#131c2e] border-2 border-white/10 hover:border-[#d4af37] p-8 rounded-3xl transition-all duration-300 shadow-xl flex flex-col justify-between group">
-        <div>
-          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#d4af37] to-[#aa771c] text-[#0f172a] flex items-center justify-center font-black text-2xl mb-6 shadow-lg group-hover:scale-110 transition-transform">2</div>
-          <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-[#fbe8a6] transition-colors">{hw.step2Title || (isAr ? 'قارن السعر اللحظي بالمصنعية' : 'Compare Live Spot Spread')}</h3>
-          <p class="text-slate-300 text-base leading-relaxed">{hw.step2Desc || (isAr ? 'استخدم حاسبتنا المباشرة لمقارنة سعر البورصة الفوري مع الهامش (Aufgeld) الذي يطلبه التاجر قبل إتمام الصفقة.' : 'Use our live calculator to compare spot exchange value against dealer premium before finalizing purchase.')}</p>
-        </div>
+      <div class="card p-8 group">
+        <div class="w-12 h-12 rounded-xl bg-amber-600 text-white flex items-center justify-center font-bold text-xl mb-6">2</div>
+        <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-amber-700 transition-colors">{s2Title}</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">{s2Desc}</p>
       </div>
 
-      <!-- Step 3 -->
-      <div class="bg-[#131c2e] border-2 border-white/10 hover:border-[#d4af37] p-8 rounded-3xl transition-all duration-300 shadow-xl flex flex-col justify-between group">
-        <div>
-          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#d4af37] to-[#aa771c] text-[#0f172a] flex items-center justify-center font-black text-2xl mb-6 shadow-lg group-hover:scale-110 transition-transform">3</div>
-          <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-[#fbe8a6] transition-colors">{hw.step3Title || (isAr ? 'احتفظ بالفاتورة لأكثر من عام' : 'Hold Over 12 Months')}</h3>
-          <p class="text-slate-300 text-base leading-relaxed">{hw.step3Desc || (isAr ? 'احتفظ بفاتورة الشراء الرسمية لمدة 12 شهراً ويوم واحد لتصبح جميع أرباحك الرأسمالية معفاة 100% من ضريبة الدخل.' : 'Keep official invoice for 12 months and 1 day so all capital gains become 100% exempt from income tax.')}</p>
-        </div>
+      <div class="card p-8 group">
+        <div class="w-12 h-12 rounded-xl bg-amber-600 text-white flex items-center justify-center font-bold text-xl mb-6">3</div>
+        <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-amber-700 transition-colors">{s3Title}</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">{s3Desc}</p>
       </div>
     </div>
 

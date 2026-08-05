@@ -2,7 +2,8 @@
   "site": {
     "title": "Almanya'da Canlı Altın Fiyatları | Euro ve Dolar Anlık Takip",
     "description": "Almanya'da güncel altın fiyatlarını Euro, Dolar ve TL olarak takip edin. 24 ayar, 22 ayar, 21 ayar ve çeyrek altın fiyatları canlı grafik ve hesaplama aracıyla.",
-    "footerDesc": "Almanya'daki Türk ve Arap yatırımcılar için Euro ve TL cinsinden anlık altın fiyatları sunan uzman takip platformu."
+    "footerDesc": "Almanya'daki Türk ve Arap yatırımcılar için Euro ve TL cinsinden anlık altın fiyatları sunan uzman takip platformu.",
+    "footerDisclaimer": "Gösterilen fiyatlar küresel piyasa hareketlerini yansıtan gösterge niteliğindedir ve Almanya'daki eyaletlere göre bayi, kuyumcu veya bankalar arasında hafifçe farklılık gösterebilir."
   },
   "nav": {
     "home": "Ana Sayfa",
@@ -46,6 +47,19 @@
       "display": true
     }
   ],
+  "contact": {
+    "nameLabel": "Ad Soyad",
+    "namePlaceholder": "Adınızı girin",
+    "emailLabel": "E-posta Adresi",
+    "emailPlaceholder": "ornek@email.com",
+    "messageLabel": "Mesaj",
+    "messagePlaceholder": "Talebinizi buraya yazın...",
+    "submit": "Mesaj Gönder",
+    "sending": "Gönderiliyor...",
+    "success": "Mesajınız başarıyla gönderildi! En kısa sürede size döneceğiz.",
+    "error": "Bir şeyler ters gitti. Lütfen doğrudan e-posta ile bize ulaşın.",
+    "directEmail": "Ya da doğrudan e-posta ile bize ulaşın:"
+  },
   "howItWorks": {
     "title": "Almanya Altın Fiyatları Nasıl Çalışır?",
     "subtitle": "Frankfurt borsası verilerini ve kuyumcu alım-satım fiyatlarını anlık olarak size ulaştırıyoruz",

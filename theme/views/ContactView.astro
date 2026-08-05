@@ -18,10 +18,10 @@ const contactSchema = {
 ---
 
 <BaseLayout locale={locale} title={`${t.nav.contact} | ${t.site.title.split('|')[0]}`} schema={contactSchema}>
-  <div class="container py-16">
+  <div class="container py-16 md:py-24">
     <div class="text-center max-w-2xl mx-auto mb-10">
-      <h1 class="text-4xl font-black text-white mb-3">📞 {t.nav.contact}</h1>
-      <p class="text-slate-400 text-lg">
+      <h1 class="text-4xl font-extrabold text-slate-900 mb-3">{t.nav.contact}</h1>
+      <p class="text-slate-600 text-lg">
         {isAr
           ? "هل لديك سؤال حول استثمارات الذهب أو ترغب في الاستفسار عن وكلاء ومحلات الصاغة المعتمدة في ألمانيا؟ راسلنا الآن."
           : "Do you have a question regarding gold investment or authorized bullion dealers across Germany? Get in touch with our team."}

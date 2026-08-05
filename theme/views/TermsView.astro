@@ -9,26 +9,30 @@ const isAr = locale === 'ar';
 ---
 
 <BaseLayout locale={locale} title={`${t.nav.terms} | ${t.site.title.split('|')[0]}`}>
-  <div class="container py-16 max-w-4xl">
-    <div class="bg-[#161e31]/80 border border-[rgba(212,175,55,0.22)] p-8 md:p-12 rounded-3xl shadow-2xl space-y-6 text-slate-300">
-      <h1 class="text-3xl font-black text-white mb-6">📜 {t.nav.terms}</h1>
+  <div class="container py-16 md:py-24 max-w-4xl">
+    <div class="card bg-white p-8 md:p-14 space-y-8 text-slate-600 leading-loose text-lg">
+      <h1 class="text-3xl font-extrabold text-slate-900 mb-2">{t.nav.terms}</h1>
       <p>
         {isAr
           ? "يُرجى قراءة شروط وأحكام الاستخدام بعناية قبل استخدام موقع «سعر الذهب في ألمانيا». بدخولك واستخدامك للموقع، فإنك توافق على الالتزام بهذه الشروط."
           : "Please read these Terms and Conditions carefully before using Gold Price Germany. By accessing or using the site, you agree to be bound by these terms."}
       </p>
-      <h2 class="text-xl font-bold text-[#d4af37]">{isAr ? "1. الغرض الاسترشادي للبيانات" : "1. Informational Purpose Only"}</h2>
-      <p>
-        {isAr
-          ? "جميع أسعار الذهب والفضة والعملات والتحليلات المعروضة على الموقع هي لأغراض إعلامية واسترشادية فقط، ولا تمثل نصيحة مالية أو استثمارية ملزمة لشراء أو بيع أي أصول."
-          : "All gold, silver, currency rates and analyses provided on this portal are strictly for informational purposes and do not constitute financial or investment advice."}
-      </p>
-      <h2 class="text-xl font-bold text-[#d4af37]">{isAr ? "2. دقة الأسعار وتحديث الأسواق" : "2. Market Data Accuracy"}</h2>
-      <p>
-        {isAr
-          ? "نستمد بياناتنا الفورية من البورصات العالمية، ولكن قد تحدث فروق طفيفة بين السعر المعروض وسعر التنفيذ الفعلي في محلات الصاغة أو البنوك في ألمانيا بسبب الهوامش المحلية وتغيرات السوق السريعة."
-          : "We source our spot feeds from international exchanges; however, slight variations may occur between displayed valuations and actual counter prices at German bullion dealers due to local spreads."}
-      </p>
+      <div>
+        <h2 class="text-xl font-bold text-amber-700 mb-3">{isAr ? "1. الغرض الاسترشادي للبيانات" : "1. Informational Purpose Only"}</h2>
+        <p>
+          {isAr
+            ? "جميع أسعار الذهب والفضة والعملات والتحليلات المعروضة على الموقع هي لأغراض إعلامية واسترشادية فقط، ولا تمثل نصيحة مالية أو استثمارية ملزمة لشراء أو بيع أي أصول."
+            : "All gold, silver, currency rates and analyses provided on this portal are strictly for informational purposes and do not constitute financial or investment advice."}
+        </p>
+      </div>
+      <div>
+        <h2 class="text-xl font-bold text-amber-700 mb-3">{isAr ? "2. دقة الأسعار وتحديث الأسواق" : "2. Market Data Accuracy"}</h2>
+        <p>
+          {isAr
+            ? "نستمد بياناتنا الفورية من البورصات العالمية، ولكن قد تحدث فروق طفيفة بين السعر المعروض وسعر التنفيذ الفعلي في محلات الصاغة أو البنوك في ألمانيا بسبب الهوامش المحلية وتغيرات السوق السريعة."
+            : "We source our spot feeds from international exchanges; however, slight variations may occur between displayed valuations and actual counter prices at German bullion dealers due to local spreads."}
+        </p>
+      </div>
     </div>
   </div>
 </BaseLayout>

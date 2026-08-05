@@ -9,67 +9,71 @@ const year = new Date().getFullYear();
 const currentPath = Astro.url.pathname;
 const social = siteConfig.socialLinks || {};
 const hasSocial = Object.values(social).some(url => Boolean(url));
+const localeNames: Record<string, string> = { ar: 'العربية', en: 'English', de: 'Deutsch', tr: 'Türkçe' };
 ---
 
-<footer class="bg-[#05080e] border-t border-[rgba(212,175,55,0.22)] py-12 text-slate-400 text-sm mt-20">
-  <div class="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
-    <div class="flex flex-col gap-4">
+<footer class="bg-slate-50 border-t border-slate-200 py-16 text-slate-500 text-sm mt-20">
+  <div class="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+    <div class="flex flex-col gap-5">
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl flex items-center justify-center text-xl shadow-lg" style="background: var(--gold-gradient);">👑</div>
-        <span class="text-lg font-bold text-white">{t.site.title.split(' ')[0]} {t.site.title.split(' ')[1]} {t.site.title.split(' ')[2]}</span>
+        <svg class="w-9 h-9 shrink-0" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="20" cy="20" r="19" stroke="#b45309" stroke-width="2"/>
+          <path d="M12 24L17 14L20 20L23 14L28 24" stroke="#b45309" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="text-lg font-bold text-slate-900">{t.site.title.split('|')[0].trim()}</span>
       </div>
-      <p class="leading-relaxed text-slate-400">{t.site.footerDesc}</p>
+      <p class="leading-relaxed text-slate-500">{t.site.footerDesc}</p>
 
       {hasSocial && (
         <div class="flex items-center gap-3 mt-2">
-          {social.facebook && <a href={social.facebook} target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg bg-[#161e31] border border-[rgba(212,175,55,0.2)] flex items-center justify-center text-white hover:border-[#d4af37] transition-all" title="Facebook">FB</a>}
-          {social.twitter && <a href={social.twitter} target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg bg-[#161e31] border border-[rgba(212,175,55,0.2)] flex items-center justify-center text-white hover:border-[#d4af37] transition-all" title="Twitter">X</a>}
-          {social.linkedin && <a href={social.linkedin} target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg bg-[#161e31] border border-[rgba(212,175,55,0.2)] flex items-center justify-center text-white hover:border-[#d4af37] transition-all" title="LinkedIn">IN</a>}
-          {social.pinterest && <a href={social.pinterest} target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg bg-[#161e31] border border-[rgba(212,175,55,0.2)] flex items-center justify-center text-white hover:border-[#d4af37] transition-all" title="Pinterest">PIN</a>}
+          {social.facebook && <a href={social.facebook} target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:border-amber-400 hover:text-amber-700 transition-all text-xs font-bold" title="Facebook">FB</a>}
+          {social.twitter && <a href={social.twitter} target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:border-amber-400 hover:text-amber-700 transition-all text-xs font-bold" title="Twitter">X</a>}
+          {social.linkedin && <a href={social.linkedin} target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:border-amber-400 hover:text-amber-700 transition-all text-xs font-bold" title="LinkedIn">IN</a>}
+          {social.pinterest && <a href={social.pinterest} target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:border-amber-400 hover:text-amber-700 transition-all text-xs font-bold" title="Pinterest">PIN</a>}
         </div>
       )}
     </div>
 
     <div>
-      <h4 class="text-white font-bold text-base mb-4">{t.nav.home}</h4>
-      <ul class="flex flex-col gap-2 list-none p-0">
-        <li><a href={getLocalizedUrl('/#live-prices', locale)} class="hover:text-[#d4af37] transition-colors">{t.nav.livePrices}</a></li>
-        <li><a href={getLocalizedUrl('/#chart', locale)} class="hover:text-[#d4af37] transition-colors">{t.nav.chart}</a></li>
-        <li><a href={getLocalizedUrl('/#calculator', locale)} class="hover:text-[#d4af37] transition-colors">{t.nav.calculator}</a></li>
-        <li><a href={getLocalizedUrl('/#alloys', locale)} class="hover:text-[#d4af37] transition-colors">{t.nav.alloys}</a></li>
+      <h4 class="text-slate-900 font-bold text-base mb-5">{t.nav.home}</h4>
+      <ul class="flex flex-col gap-3 list-none p-0">
+        <li><a href={getLocalizedUrl('/#live-prices', locale)} class="hover:text-amber-700 transition-colors">{t.nav.livePrices}</a></li>
+        <li><a href={getLocalizedUrl('/#chart', locale)} class="hover:text-amber-700 transition-colors">{t.nav.chart}</a></li>
+        <li><a href={getLocalizedUrl('/#calculator', locale)} class="hover:text-amber-700 transition-colors">{t.nav.calculator}</a></li>
+        <li><a href={getLocalizedUrl('/#alloys', locale)} class="hover:text-amber-700 transition-colors">{t.nav.alloys}</a></li>
       </ul>
     </div>
 
     <div>
-      <h4 class="text-white font-bold text-base mb-4">{t.nav.about} & Legal</h4>
-      <ul class="flex flex-col gap-2 list-none p-0">
-        <li><a href={getLocalizedUrl('/about-us', locale)} class="hover:text-[#d4af37] transition-colors">{t.nav.about}</a></li>
-        <li><a href={getLocalizedUrl('/contact-us', locale)} class="hover:text-[#d4af37] transition-colors">{t.nav.contact}</a></li>
-        <li><a href={getLocalizedUrl('/terms', locale)} class="hover:text-[#d4af37] transition-colors">{t.nav.terms}</a></li>
-        <li><a href={getLocalizedUrl('/privacy', locale)} class="hover:text-[#d4af37] transition-colors">{t.nav.privacy}</a></li>
-        <li><a href={getLocalizedUrl('/sitemap', locale)} class="hover:text-[#d4af37] transition-colors">Sitemap</a></li>
+      <h4 class="text-slate-900 font-bold text-base mb-5">{t.nav.about} & Legal</h4>
+      <ul class="flex flex-col gap-3 list-none p-0">
+        <li><a href={getLocalizedUrl('/about-us', locale)} class="hover:text-amber-700 transition-colors">{t.nav.about}</a></li>
+        <li><a href={getLocalizedUrl('/contact-us', locale)} class="hover:text-amber-700 transition-colors">{t.nav.contact}</a></li>
+        <li><a href={getLocalizedUrl('/terms', locale)} class="hover:text-amber-700 transition-colors">{t.nav.terms}</a></li>
+        <li><a href={getLocalizedUrl('/privacy', locale)} class="hover:text-amber-700 transition-colors">{t.nav.privacy}</a></li>
+        <li><a href={getLocalizedUrl('/sitemap', locale)} class="hover:text-amber-700 transition-colors">Sitemap</a></li>
       </ul>
     </div>
 
     <div>
-      <h4 class="text-white font-bold text-base mb-4">{t.common.language}</h4>
-      <div class="flex flex-wrap gap-2">
+      <h4 class="text-slate-900 font-bold text-base mb-5">{t.common.language}</h4>
+      <div class="flex flex-wrap gap-2.5">
         {supportedLocales.map((loc) => (
           <a
             href={getLocalizedUrl(currentPath, loc)}
-            class={`px-3 py-1.5 rounded-lg border text-xs font-bold transition-all ${loc === locale ? 'bg-[rgba(212,175,55,0.2)] border-[#d4af37] text-[#d4af37]' : 'bg-[#161e31] border-slate-700 text-slate-300 hover:border-slate-500'}`}
+            class={`px-3 py-1.5 rounded-lg border text-xs font-bold transition-all ${loc === locale ? 'bg-amber-50 border-amber-400 text-amber-700' : 'bg-white border-slate-200 text-slate-500 hover:border-slate-300'}`}
           >
-            {loc.toUpperCase()}
+            {localeNames[loc] || loc.toUpperCase()}
           </a>
         ))}
       </div>
-      <p class="mt-4 text-xs text-slate-500 leading-relaxed">
-        الأسعار المعروضة هي استرشادية تعكس حركة السوق العالمي وقد تختلف قليلاً حسب محلات الصاغة والبنوك في ولايات ألمانيا.
+      <p class="mt-4 text-xs text-slate-400 leading-relaxed">
+        {t.site.footerDisclaimer}
       </p>
     </div>
   </div>
 
-  <div class="container border-t border-[rgba(255,255,255,0.05)] pt-6 text-center text-xs text-slate-500">
+  <div class="container border-t border-slate-200 pt-6 text-center text-xs text-slate-400">
     <p>{t.common.copyright.replace('{year}', year.toString())}</p>
   </div>
 </footer>

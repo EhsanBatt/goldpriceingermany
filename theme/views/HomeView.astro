@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '~theme/components/BaseLayout.astro';
 import GoldSection from '~theme/components/GoldSection.astro';
+import PriceHistorySection from '~theme/components/PriceHistorySection.astro';
 import HowItWorks from '~theme/components/HowItWorks.astro';
 import FaqSection from '~theme/components/FaqSection.astro';
 import { getTranslations } from '~theme/i18n';
@@ -36,7 +37,9 @@ const faqSchema = activeFaqs.length > 0 ? {
   <script type="application/ld+json" set:html={JSON.stringify(webSiteSchema)} slot="head" />
   
   <GoldSection locale={locale} />
-  
+
+  <PriceHistorySection locale={locale} />
+
   <HowItWorks locale={locale} />
   
   <FaqSection locale={locale} />
